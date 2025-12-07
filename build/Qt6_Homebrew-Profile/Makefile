@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Library/Developer/CommandLineTools/usr/bin/clang
 CXX           = /Library/Developer/CommandLineTools/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -g $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -O2 -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra $(DEFINES)
-INCPATH       = -I../../../CW -I. -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib
+INCPATH       = -I../../../CW -I. -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtSql.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib
 QMAKE         = /opt/homebrew/opt/qtbase/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = CW1.0.0
 DISTDIR = /Users/volodymyrmac/Documents/QT_Projects/CW/build/Qt6_Homebrew-Profile/.tmp/CW1.0.0
 LINK          = /Library/Developer/CommandLineTools/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/opt/homebrew/lib
-LIBS          = $(SUBLIBS) -F/opt/homebrew/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/opt/homebrew/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtSql -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework OpenGL   
 AR            = /Library/Developer/CommandLineTools/usr/bin/ar cq
 RANLIB        = /Library/Developer/CommandLineTools/usr/bin/ranlib -s
 SED           = sed
@@ -54,12 +54,17 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../../main.cpp \
 		../../main_window.cpp qrc_bg_images.cpp \
+		qrc_db_conf.cpp \
+		qrc_page1_bg.cpp \
 		moc_main_window.cpp
 OBJECTS       = main.o \
 		main_window.o \
 		qrc_bg_images.o \
+		qrc_db_conf.o \
+		qrc_page1_bg.o \
 		moc_main_window.o
-DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
+DIST          = ../../../Database_TIR_Course_Work/config.json \
+		/opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/share/qt/mkspecs/features/device_config.prf \
 		/opt/homebrew/share/qt/mkspecs/common/unix.conf \
 		/opt/homebrew/share/qt/mkspecs/common/mac.conf \
@@ -837,8 +842,11 @@ Makefile: ../../CW.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt
 		../../CW.pro \
 		/opt/homebrew/share/qt/mkspecs/macx-clang/Info.plist.dSYM.in \
 		../../bg_images.qrc \
+		../../db_conf.qrc \
+		../../page1_bg.qrc \
 		/opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl \
+		/opt/homebrew/lib/QtSql.framework/Resources/QtSql.prl \
 		/opt/homebrew/lib/QtCore.framework/Resources/QtCore.prl
 	$(QMAKE) -o Makefile ../../CW.pro -spec macx-clang CONFIG+=qml_debug CONFIG+=qtquickcompiler CONFIG+=force_debug_info CONFIG+=separate_debug_info
 /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf:
@@ -1218,8 +1226,11 @@ Makefile: ../../CW.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt
 ../../CW.pro:
 /opt/homebrew/share/qt/mkspecs/macx-clang/Info.plist.dSYM.in:
 ../../bg_images.qrc:
+../../db_conf.qrc:
+../../page1_bg.qrc:
 /opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl:
+/opt/homebrew/lib/QtSql.framework/Resources/QtSql.prl:
 /opt/homebrew/lib/QtCore.framework/Resources/QtCore.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../../CW.pro -spec macx-clang CONFIG+=qml_debug CONFIG+=qtquickcompiler CONFIG+=force_debug_info CONFIG+=separate_debug_info
@@ -1245,7 +1256,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../bg_images.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bg_images.qrc ../../db_conf.qrc ../../page1_bg.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../main_window.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../../main.cpp ../../main_window.cpp $(DISTDIR)/
@@ -1276,13 +1287,22 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_bg_images.cpp
+compiler_rcc_make_all: qrc_bg_images.cpp qrc_db_conf.cpp qrc_page1_bg.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_bg_images.cpp
+	-$(DEL_FILE) qrc_bg_images.cpp qrc_db_conf.cpp qrc_page1_bg.cpp
 qrc_bg_images.cpp: ../../bg_images.qrc \
 		/opt/homebrew/share/qt/libexec/rcc \
-		../../photo_for_bg.PNG
+		../../photo_for_bg.png
 	/opt/homebrew/share/qt/libexec/rcc -name bg_images ../../bg_images.qrc -o qrc_bg_images.cpp
+
+qrc_db_conf.cpp: ../../db_conf.qrc \
+		/opt/homebrew/share/qt/libexec/rcc
+	/opt/homebrew/share/qt/libexec/rcc -name db_conf ../../db_conf.qrc -o qrc_db_conf.cpp
+
+qrc_page1_bg.cpp: ../../page1_bg.qrc \
+		/opt/homebrew/share/qt/libexec/rcc \
+		../../bg_photo_pg1.png
+	/opt/homebrew/share/qt/libexec/rcc -name page1_bg ../../page1_bg.qrc -o qrc_page1_bg.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
@@ -1296,9 +1316,11 @@ compiler_moc_header_clean:
 moc_main_window.cpp: ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/volodymyrmac/Documents/QT_Projects/CW/build/Qt6_Homebrew-Profile/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/volodymyrmac/Documents/QT_Projects/CW -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../main_window.h -o moc_main_window.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/volodymyrmac/Documents/QT_Projects/CW/build/Qt6_Homebrew-Profile/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/volodymyrmac/Documents/QT_Projects/CW -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtSql.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../main_window.h -o moc_main_window.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1326,18 +1348,40 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 main.o: ../../main.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/qapplication.h
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qapplication.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdebug.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QFile \
+		/opt/homebrew/lib/QtCore.framework/Headers/qfile.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QJsonDocument \
+		/opt/homebrew/lib/QtCore.framework/Headers/qjsondocument.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QJsonObject \
+		/opt/homebrew/lib/QtCore.framework/Headers/qjsonobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 main_window.o: ../../main_window.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		ui_main_window.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_window.o ../../main_window.cpp
 
 qrc_bg_images.o: qrc_bg_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_bg_images.o qrc_bg_images.cpp
+
+qrc_db_conf.o: qrc_db_conf.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_db_conf.o qrc_db_conf.cpp
+
+qrc_page1_bg.o: qrc_page1_bg.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_page1_bg.o qrc_page1_bg.cpp
 
 moc_main_window.o: moc_main_window.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_main_window.o moc_main_window.cpp

@@ -1,5 +1,7 @@
 QT       += core gui
 
+QT += sql
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
@@ -27,6 +29,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     bg_images.qrc \
+    db_conf.qrc \
     page1_bg.qrc
 
-DISTFILES +=
+DISTFILES += \
+    .gitignore

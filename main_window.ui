@@ -29,6 +29,9 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
@@ -54,7 +57,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page_1">
      <widget class="QGroupBox" name="user_groupbox">
@@ -72,7 +75,7 @@
       <property name="flat">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -87,7 +90,7 @@
           <item>
            <widget class="QLabel" name="username_label">
             <property name="text">
-             <string>Name</string>
+             <string>Name        </string>
             </property>
            </widget>
           </item>
@@ -101,7 +104,7 @@
           <item>
            <widget class="QLabel" name="usersurname_label">
             <property name="text">
-             <string>Surname</string>
+             <string>Surname   </string>
             </property>
            </widget>
           </item>
@@ -129,7 +132,7 @@
           <item>
            <widget class="QLabel" name="userphone_label">
             <property name="text">
-             <string>Phone</string>
+             <string>Phone       </string>
             </property>
            </widget>
           </item>
@@ -170,7 +173,7 @@
       <property name="flat">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -248,13 +251,13 @@
       <property name="geometry">
        <rect>
         <x>350</x>
-        <y>240</y>
+        <y>260</y>
         <width>301</width>
         <height>191</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-style :rgb(0, 0, 0)</string>
+       <string notr="true"/>
       </property>
       <property name="title">
        <string>                        LogIn as administator</string>
@@ -330,7 +333,7 @@
        <string>Exit</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>330</x>

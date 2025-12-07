@@ -30,7 +30,7 @@ public:
     QStackedWidget *stackedWidget;
     QWidget *page_1;
     QGroupBox *user_groupbox;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_3;
     QLabel *username_label;
@@ -47,7 +47,7 @@ public:
     QPushButton *user_logIn_pushButton;
     QPushButton *admin_entry_pushbutton;
     QGroupBox *hello_text_groupbox;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
     QLabel *Hello_label_up;
     QLabel *Hello_label_down;
@@ -66,7 +66,7 @@ public:
     QPushButton *admin_logIn_pushbutton;
     QPushButton *back_to_page1_pushbutton;
     QPushButton *exit_admpage_pushButton;
-    QWidget *widget2;
+    QWidget *layoutWidget2;
     QVBoxLayout *verticalLayout_2;
     QLabel *adm_label_up;
     QLabel *adm_label_down;
@@ -81,6 +81,7 @@ public:
         Main_Window->setStyleSheet(QString::fromUtf8(""));
         centralwidget = new QWidget(Main_Window);
         centralwidget->setObjectName("centralwidget");
+        centralwidget->setStyleSheet(QString::fromUtf8(""));
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName("stackedWidget");
         stackedWidget->setGeometry(QRect(0, 0, 1000, 800));
@@ -93,20 +94,20 @@ public:
         user_groupbox->setObjectName("user_groupbox");
         user_groupbox->setGeometry(QRect(320, 260, 361, 251));
         user_groupbox->setFlat(false);
-        widget = new QWidget(user_groupbox);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(20, 28, 321, 211));
-        verticalLayout_3 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(user_groupbox);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(20, 28, 321, 211));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setObjectName("verticalLayout_3");
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        username_label = new QLabel(widget);
+        username_label = new QLabel(layoutWidget);
         username_label->setObjectName("username_label");
 
         horizontalLayout_3->addWidget(username_label);
 
-        name_lineEdit = new QLineEdit(widget);
+        name_lineEdit = new QLineEdit(layoutWidget);
         name_lineEdit->setObjectName("name_lineEdit");
 
         horizontalLayout_3->addWidget(name_lineEdit);
@@ -116,12 +117,12 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        usersurname_label = new QLabel(widget);
+        usersurname_label = new QLabel(layoutWidget);
         usersurname_label->setObjectName("usersurname_label");
 
         horizontalLayout_4->addWidget(usersurname_label);
 
-        surname_lineEdit = new QLineEdit(widget);
+        surname_lineEdit = new QLineEdit(layoutWidget);
         surname_lineEdit->setObjectName("surname_lineEdit");
 
         horizontalLayout_4->addWidget(surname_lineEdit);
@@ -131,12 +132,12 @@ public:
 
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setObjectName("horizontalLayout_5");
-        useraftername_label = new QLabel(widget);
+        useraftername_label = new QLabel(layoutWidget);
         useraftername_label->setObjectName("useraftername_label");
 
         horizontalLayout_5->addWidget(useraftername_label);
 
-        aftername_lineEdit = new QLineEdit(widget);
+        aftername_lineEdit = new QLineEdit(layoutWidget);
         aftername_lineEdit->setObjectName("aftername_lineEdit");
 
         horizontalLayout_5->addWidget(aftername_lineEdit);
@@ -146,12 +147,12 @@ public:
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName("horizontalLayout_6");
-        userphone_label = new QLabel(widget);
+        userphone_label = new QLabel(layoutWidget);
         userphone_label->setObjectName("userphone_label");
 
         horizontalLayout_6->addWidget(userphone_label);
 
-        phone_lineEdit = new QLineEdit(widget);
+        phone_lineEdit = new QLineEdit(layoutWidget);
         phone_lineEdit->setObjectName("phone_lineEdit");
 
         horizontalLayout_6->addWidget(phone_lineEdit);
@@ -159,12 +160,12 @@ public:
 
         verticalLayout_3->addLayout(horizontalLayout_6);
 
-        user_logIn_pushButton = new QPushButton(widget);
+        user_logIn_pushButton = new QPushButton(layoutWidget);
         user_logIn_pushButton->setObjectName("user_logIn_pushButton");
 
         verticalLayout_3->addWidget(user_logIn_pushButton);
 
-        admin_entry_pushbutton = new QPushButton(widget);
+        admin_entry_pushbutton = new QPushButton(layoutWidget);
         admin_entry_pushbutton->setObjectName("admin_entry_pushbutton");
 
         verticalLayout_3->addWidget(admin_entry_pushbutton);
@@ -173,13 +174,13 @@ public:
         hello_text_groupbox->setObjectName("hello_text_groupbox");
         hello_text_groupbox->setGeometry(QRect(300, 70, 401, 91));
         hello_text_groupbox->setFlat(false);
-        widget1 = new QWidget(hello_text_groupbox);
-        widget1->setObjectName("widget1");
-        widget1->setGeometry(QRect(0, 0, 401, 91));
-        verticalLayout = new QVBoxLayout(widget1);
+        layoutWidget1 = new QWidget(hello_text_groupbox);
+        layoutWidget1->setObjectName("layoutWidget1");
+        layoutWidget1->setGeometry(QRect(0, 0, 401, 91));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        Hello_label_up = new QLabel(widget1);
+        Hello_label_up = new QLabel(layoutWidget1);
         Hello_label_up->setObjectName("Hello_label_up");
         QFont font;
         font.setPointSize(25);
@@ -187,7 +188,7 @@ public:
 
         verticalLayout->addWidget(Hello_label_up);
 
-        Hello_label_down = new QLabel(widget1);
+        Hello_label_down = new QLabel(layoutWidget1);
         Hello_label_down->setObjectName("Hello_label_down");
         Hello_label_down->setFont(font);
 
@@ -211,8 +212,8 @@ public:
         page_admin_login->setObjectName("page_admin_login");
         Admin_logIn_groupbox = new QGroupBox(page_admin_login);
         Admin_logIn_groupbox->setObjectName("Admin_logIn_groupbox");
-        Admin_logIn_groupbox->setGeometry(QRect(350, 240, 301, 191));
-        Admin_logIn_groupbox->setStyleSheet(QString::fromUtf8("background-style :rgb(0, 0, 0)"));
+        Admin_logIn_groupbox->setGeometry(QRect(350, 260, 301, 191));
+        Admin_logIn_groupbox->setStyleSheet(QString::fromUtf8(""));
         Admin_logIn_groupbox->setFlat(false);
         layoutWidget_2 = new QWidget(Admin_logIn_groupbox);
         layoutWidget_2->setObjectName("layoutWidget_2");
@@ -263,19 +264,19 @@ public:
         exit_admpage_pushButton = new QPushButton(page_admin_login);
         exit_admpage_pushButton->setObjectName("exit_admpage_pushButton");
         exit_admpage_pushButton->setGeometry(QRect(830, 720, 100, 32));
-        widget2 = new QWidget(page_admin_login);
-        widget2->setObjectName("widget2");
-        widget2->setGeometry(QRect(330, 100, 328, 70));
-        verticalLayout_2 = new QVBoxLayout(widget2);
+        layoutWidget2 = new QWidget(page_admin_login);
+        layoutWidget2->setObjectName("layoutWidget2");
+        layoutWidget2->setGeometry(QRect(330, 100, 328, 70));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget2);
         verticalLayout_2->setObjectName("verticalLayout_2");
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        adm_label_up = new QLabel(widget2);
+        adm_label_up = new QLabel(layoutWidget2);
         adm_label_up->setObjectName("adm_label_up");
         adm_label_up->setFont(font);
 
         verticalLayout_2->addWidget(adm_label_up);
 
-        adm_label_down = new QLabel(widget2);
+        adm_label_down = new QLabel(layoutWidget2);
         adm_label_down->setObjectName("adm_label_down");
         adm_label_down->setFont(font);
 
@@ -286,7 +287,7 @@ public:
 
         retranslateUi(Main_Window);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(Main_Window);
@@ -296,10 +297,10 @@ public:
     {
         Main_Window->setWindowTitle(QCoreApplication::translate("Main_Window", "Car service app", nullptr));
         user_groupbox->setTitle(QString());
-        username_label->setText(QCoreApplication::translate("Main_Window", "Name", nullptr));
-        usersurname_label->setText(QCoreApplication::translate("Main_Window", "Surname", nullptr));
+        username_label->setText(QCoreApplication::translate("Main_Window", "Name        ", nullptr));
+        usersurname_label->setText(QCoreApplication::translate("Main_Window", "Surname   ", nullptr));
         useraftername_label->setText(QCoreApplication::translate("Main_Window", "Aftername", nullptr));
-        userphone_label->setText(QCoreApplication::translate("Main_Window", "Phone", nullptr));
+        userphone_label->setText(QCoreApplication::translate("Main_Window", "Phone       ", nullptr));
         user_logIn_pushButton->setText(QCoreApplication::translate("Main_Window", "Login", nullptr));
         admin_entry_pushbutton->setText(QCoreApplication::translate("Main_Window", "LogIn as Administrator", nullptr));
         hello_text_groupbox->setTitle(QString());
