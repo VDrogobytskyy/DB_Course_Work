@@ -53,11 +53,13 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../../main.cpp \
-		../../main_window.cpp qrc_images.cpp \
+		../../main_window.cpp qrc_bg_images.cpp \
+		qrc_page1_bg.cpp \
 		moc_main_window.cpp
 OBJECTS       = main.o \
 		main_window.o \
-		qrc_images.o \
+		qrc_bg_images.o \
+		qrc_page1_bg.o \
 		moc_main_window.o
 DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/share/qt/mkspecs/features/device_config.prf \
@@ -828,7 +830,8 @@ Makefile: ../../CW.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt
 		/opt/homebrew/share/qt/mkspecs/features/yacc.prf \
 		/opt/homebrew/share/qt/mkspecs/features/lex.prf \
 		../../CW.pro \
-		../../images.qrc \
+		../../bg_images.qrc \
+		../../page1_bg.qrc \
 		/opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl \
 		/opt/homebrew/lib/QtCore.framework/Resources/QtCore.prl
@@ -1205,7 +1208,8 @@ Makefile: ../../CW.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt
 /opt/homebrew/share/qt/mkspecs/features/yacc.prf:
 /opt/homebrew/share/qt/mkspecs/features/lex.prf:
 ../../CW.pro:
-../../images.qrc:
+../../bg_images.qrc:
+../../page1_bg.qrc:
 /opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl:
 /opt/homebrew/lib/QtCore.framework/Resources/QtCore.prl:
@@ -1233,7 +1237,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../images.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bg_images.qrc ../../page1_bg.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../main_window.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../../main.cpp ../../main_window.cpp $(DISTDIR)/
@@ -1264,13 +1268,18 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_images.cpp
+compiler_rcc_make_all: qrc_bg_images.cpp qrc_page1_bg.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_images.cpp
-qrc_images.cpp: ../../images.qrc \
+	-$(DEL_FILE) qrc_bg_images.cpp qrc_page1_bg.cpp
+qrc_bg_images.cpp: ../../bg_images.qrc \
 		/opt/homebrew/share/qt/libexec/rcc \
-		../../shop_image.png
-	/opt/homebrew/share/qt/libexec/rcc -name images ../../images.qrc -o qrc_images.cpp
+		../../photo_for_bg.png
+	/opt/homebrew/share/qt/libexec/rcc -name bg_images ../../bg_images.qrc -o qrc_bg_images.cpp
+
+qrc_page1_bg.cpp: ../../page1_bg.qrc \
+		/opt/homebrew/share/qt/libexec/rcc \
+		../../bg_photo_pg1.png
+	/opt/homebrew/share/qt/libexec/rcc -name page1_bg ../../page1_bg.qrc -o qrc_page1_bg.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
@@ -1284,6 +1293,8 @@ compiler_moc_header_clean:
 moc_main_window.cpp: ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
 	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/volodymyrmac/Documents/QT_Projects/CW/build/Qt6_Homebrew-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/volodymyrmac/Documents/QT_Projects/CW -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../main_window.h -o moc_main_window.cpp
@@ -1314,6 +1325,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 main.o: ../../main.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
@@ -1321,11 +1334,16 @@ main.o: ../../main.cpp ../../main_window.h \
 main_window.o: ../../main_window.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		ui_main_window.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_window.o ../../main_window.cpp
 
-qrc_images.o: qrc_images.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
+qrc_bg_images.o: qrc_bg_images.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_bg_images.o qrc_bg_images.cpp
+
+qrc_page1_bg.o: qrc_page1_bg.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_page1_bg.o qrc_page1_bg.cpp
 
 moc_main_window.o: moc_main_window.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_main_window.o moc_main_window.cpp

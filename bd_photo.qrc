@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/bd_photo">
+        <file>photo_for_bg.PNG</file>
+    </qresource>
+</RCC>

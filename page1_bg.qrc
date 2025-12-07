@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/page1_bg">
+        <file>bg_photo_pg1.png</file>
+    </qresource>
+</RCC>

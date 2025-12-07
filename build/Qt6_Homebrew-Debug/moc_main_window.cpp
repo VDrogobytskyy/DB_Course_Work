@@ -39,13 +39,28 @@ template <> constexpr inline auto Main_Window::qt_create_metaobjectdata<qt_meta_
     namespace QMC = QtMocConstants;
     QtMocHelpers::StringRefStorage qt_stringData {
         "Main_Window",
-        "on_pushButton_clicked",
-        ""
+        "on_admin_logIn_pushbutton_clicked",
+        "",
+        "on_FAQ_tool_button_clicked",
+        "on_exit_pushButton_clicked",
+        "on_admin_entry_pushbutton_clicked",
+        "on_back_to_page1_pushbutton_clicked",
+        "on_exit_admpage_pushButton_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
-        // Slot 'on_pushButton_clicked'
+        // Slot 'on_admin_logIn_pushbutton_clicked'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_FAQ_tool_button_clicked'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exit_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_admin_entry_pushbutton_clicked'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_back_to_page1_pushbutton_clicked'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exit_admpage_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(7, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -69,7 +84,12 @@ void Main_Window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     auto *_t = static_cast<Main_Window *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->on_pushButton_clicked(); break;
+        case 0: _t->on_admin_logIn_pushbutton_clicked(); break;
+        case 1: _t->on_FAQ_tool_button_clicked(); break;
+        case 2: _t->on_exit_pushButton_clicked(); break;
+        case 3: _t->on_admin_entry_pushbutton_clicked(); break;
+        case 4: _t->on_back_to_page1_pushbutton_clicked(); break;
+        case 5: _t->on_exit_admpage_pushButton_clicked(); break;
         default: ;
         }
     }
@@ -95,14 +115,14 @@ int Main_Window::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 6;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 6;
     }
     return _id;
 }

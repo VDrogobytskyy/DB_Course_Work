@@ -14,7 +14,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,7 +24,6 @@ public:
     QWidget *centralwidget;
     QPushButton *pushButton;
     QMenuBar *menubar;
-    QStatusBar *statusbar;
 
     void setupUi(QMainWindow *Main_Window)
     {
@@ -38,15 +36,12 @@ public:
         centralwidget->setObjectName("centralwidget");
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(480, 300, 100, 32));
+        pushButton->setGeometry(QRect(480, 291, 71, 21));
         Main_Window->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Main_Window);
         menubar->setObjectName("menubar");
         menubar->setGeometry(QRect(0, 0, 1000, 33));
         Main_Window->setMenuBar(menubar);
-        statusbar = new QStatusBar(Main_Window);
-        statusbar->setObjectName("statusbar");
-        Main_Window->setStatusBar(statusbar);
 
         retranslateUi(Main_Window);
 
