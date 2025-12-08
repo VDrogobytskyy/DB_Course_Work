@@ -52,18 +52,21 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../main.cpp \
+SOURCES       = ../../database_logic.cpp \
+		../../main.cpp \
 		../../main_window.cpp qrc_bg_images.cpp \
 		qrc_db_conf.cpp \
 		qrc_page1_bg.cpp \
 		moc_main_window.cpp
-OBJECTS       = main.o \
+OBJECTS       = database_logic.o \
+		main.o \
 		main_window.o \
 		qrc_bg_images.o \
 		qrc_db_conf.o \
 		qrc_page1_bg.o \
 		moc_main_window.o
-DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
+DIST          = ../../.gitignore \
+		/opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/share/qt/mkspecs/features/device_config.prf \
 		/opt/homebrew/share/qt/mkspecs/common/unix.conf \
 		/opt/homebrew/share/qt/mkspecs/common/mac.conf \
@@ -434,7 +437,9 @@ DIST          = /opt/homebrew/share/qt/mkspecs/features/spec_pre.prf \
 		/opt/homebrew/share/qt/mkspecs/features/exceptions.prf \
 		/opt/homebrew/share/qt/mkspecs/features/yacc.prf \
 		/opt/homebrew/share/qt/mkspecs/features/lex.prf \
-		../../../../CW.pro ../../main_window.h ../../main.cpp \
+		../../../../CW.pro ../../database_logic.h \
+		../../main_window.h ../../database_logic.cpp \
+		../../main.cpp \
 		../../main_window.cpp
 QMAKE_TARGET  = CW
 DESTDIR       = 
@@ -1245,8 +1250,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../bg_images.qrc ../../db_conf.qrc ../../page1_bg.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main_window.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../main_window.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../database_logic.h ../../main_window.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../database_logic.cpp ../../main.cpp ../../main_window.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../main_window.ui $(DISTDIR)/
 
 
@@ -1333,13 +1338,7 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-main.o: ../../main.cpp ../../main_window.h \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/qapplication.h \
+database_logic.o: ../../database_logic.cpp ../../database_logic.h \
 		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
 		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
 		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
@@ -1352,6 +1351,18 @@ main.o: ../../main.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qjsondocument.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QJsonObject \
 		/opt/homebrew/lib/QtCore.framework/Headers/qjsonobject.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o database_logic.o ../../database_logic.cpp
+
+main.o: ../../main.cpp ../../main_window.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
 
 main_window.o: ../../main_window.cpp ../../main_window.h \

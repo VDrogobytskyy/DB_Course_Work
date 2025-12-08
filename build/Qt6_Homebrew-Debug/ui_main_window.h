@@ -13,11 +13,13 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -53,6 +55,15 @@ public:
     QLabel *Hello_label_down;
     QPushButton *FAQ_tool_button;
     QPushButton *exit_pushButton;
+    QWidget *page_2;
+    QLabel *Hello_label_up_2;
+    QPushButton *exit_pushButton_pg2;
+    QPushButton *cancel_pushButton_pg2;
+    QLabel *welcome_name_label;
+    QGroupBox *groupBox;
+    QTableWidget *logged_us_tableWidget;
+    QPushButton *create_new_record_pushbutton;
+    QWidget *page_3;
     QWidget *page_admin_login;
     QGroupBox *Admin_logIn_groupbox;
     QWidget *layoutWidget_2;
@@ -208,6 +219,56 @@ public:
 "    padding: 5px;\n"
 "}"));
         stackedWidget->addWidget(page_1);
+        page_2 = new QWidget();
+        page_2->setObjectName("page_2");
+        Hello_label_up_2 = new QLabel(page_2);
+        Hello_label_up_2->setObjectName("Hello_label_up_2");
+        Hello_label_up_2->setGeometry(QRect(390, 110, 231, 41));
+        Hello_label_up_2->setFont(font);
+        exit_pushButton_pg2 = new QPushButton(page_2);
+        exit_pushButton_pg2->setObjectName("exit_pushButton_pg2");
+        exit_pushButton_pg2->setGeometry(QRect(860, 680, 100, 32));
+        cancel_pushButton_pg2 = new QPushButton(page_2);
+        cancel_pushButton_pg2->setObjectName("cancel_pushButton_pg2");
+        cancel_pushButton_pg2->setGeometry(QRect(40, 680, 100, 32));
+        welcome_name_label = new QLabel(page_2);
+        welcome_name_label->setObjectName("welcome_name_label");
+        welcome_name_label->setGeometry(QRect(390, 150, 231, 41));
+        welcome_name_label->setFont(font);
+        welcome_name_label->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        groupBox = new QGroupBox(page_2);
+        groupBox->setObjectName("groupBox");
+        groupBox->setGeometry(QRect(10, 230, 951, 291));
+        logged_us_tableWidget = new QTableWidget(groupBox);
+        if (logged_us_tableWidget->columnCount() < 7)
+            logged_us_tableWidget->setColumnCount(7);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        logged_us_tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        logged_us_tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        logged_us_tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        logged_us_tableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        logged_us_tableWidget->setHorizontalHeaderItem(4, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        logged_us_tableWidget->setHorizontalHeaderItem(5, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        logged_us_tableWidget->setHorizontalHeaderItem(6, __qtablewidgetitem6);
+        if (logged_us_tableWidget->rowCount() < 1)
+            logged_us_tableWidget->setRowCount(1);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        logged_us_tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem7);
+        logged_us_tableWidget->setObjectName("logged_us_tableWidget");
+        logged_us_tableWidget->setGeometry(QRect(0, 20, 951, 271));
+        create_new_record_pushbutton = new QPushButton(page_2);
+        create_new_record_pushbutton->setObjectName("create_new_record_pushbutton");
+        create_new_record_pushbutton->setGeometry(QRect(420, 600, 161, 41));
+        stackedWidget->addWidget(page_2);
+        page_3 = new QWidget();
+        page_3->setObjectName("page_3");
+        stackedWidget->addWidget(page_3);
         page_admin_login = new QWidget();
         page_admin_login->setObjectName("page_admin_login");
         Admin_logIn_groupbox = new QGroupBox(page_admin_login);
@@ -245,6 +306,10 @@ public:
 
         line_edit_Admin_password = new QLineEdit(layoutWidget_2);
         line_edit_Admin_password->setObjectName("line_edit_Admin_password");
+        QFont font1;
+        font1.setStrikeOut(false);
+        line_edit_Admin_password->setFont(font1);
+        line_edit_Admin_password->setEchoMode(QLineEdit::EchoMode::Password);
 
         horizontalLayout_8->addWidget(line_edit_Admin_password);
 
@@ -287,7 +352,7 @@ public:
 
         retranslateUi(Main_Window);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(Main_Window);
@@ -308,6 +373,28 @@ public:
         Hello_label_down->setText(QCoreApplication::translate("Main_Window", "       The best choice for your car", nullptr));
         FAQ_tool_button->setText(QCoreApplication::translate("Main_Window", "FAQ", nullptr));
         exit_pushButton->setText(QCoreApplication::translate("Main_Window", "Exit", nullptr));
+        Hello_label_up_2->setText(QCoreApplication::translate("Main_Window", "PrimeMotors Service", nullptr));
+        exit_pushButton_pg2->setText(QCoreApplication::translate("Main_Window", "Exit", nullptr));
+        cancel_pushButton_pg2->setText(QCoreApplication::translate("Main_Window", "Cancel", nullptr));
+        welcome_name_label->setText(QString());
+        groupBox->setTitle(QCoreApplication::translate("Main_Window", "All your records", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = logged_us_tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QCoreApplication::translate("Main_Window", "New Column", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = logged_us_tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("Main_Window", "New Column", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = logged_us_tableWidget->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QCoreApplication::translate("Main_Window", "New Column", nullptr));
+        QTableWidgetItem *___qtablewidgetitem3 = logged_us_tableWidget->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("Main_Window", "New Column", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = logged_us_tableWidget->horizontalHeaderItem(4);
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("Main_Window", "New Column", nullptr));
+        QTableWidgetItem *___qtablewidgetitem5 = logged_us_tableWidget->horizontalHeaderItem(5);
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("Main_Window", "New Column", nullptr));
+        QTableWidgetItem *___qtablewidgetitem6 = logged_us_tableWidget->horizontalHeaderItem(6);
+        ___qtablewidgetitem6->setText(QCoreApplication::translate("Main_Window", "New Column", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = logged_us_tableWidget->verticalHeaderItem(0);
+        ___qtablewidgetitem7->setText(QCoreApplication::translate("Main_Window", "New Row", nullptr));
+        create_new_record_pushbutton->setText(QCoreApplication::translate("Main_Window", "Create new record", nullptr));
         Admin_logIn_groupbox->setTitle(QCoreApplication::translate("Main_Window", "                        LogIn as administator", nullptr));
         label_Admin_ID->setText(QCoreApplication::translate("Main_Window", "Admin_ID", nullptr));
         label_Admin_password->setText(QCoreApplication::translate("Main_Window", "Password", nullptr));

@@ -37,6 +37,14 @@ class Main_Window : public QMainWindow
 
         void on_exit_admpage_pushButton_clicked();
 
+        void on_user_logIn_pushButton_clicked();
+
+        void on_exit_pushButton_pg2_clicked();
+
+        void on_cancel_pushButton_pg2_clicked();
+
+        void on_create_new_record_pushbutton_clicked();
+
     private:
         Ui::Main_Window *ui;
 };
