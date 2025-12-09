@@ -1311,6 +1311,11 @@ moc_main_window.cpp: ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
 	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/volodymyrmac/Documents/QT_Projects/CW/build/Qt6_Homebrew-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/volodymyrmac/Documents/QT_Projects/CW -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtSql.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../main_window.h -o moc_main_window.cpp
@@ -1341,6 +1346,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 database_logic.o: ../../database_logic.cpp ../../database_logic.h \
 		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
 		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
 		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
 		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
@@ -1350,7 +1357,9 @@ database_logic.o: ../../database_logic.cpp ../../database_logic.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QJsonDocument \
 		/opt/homebrew/lib/QtCore.framework/Headers/qjsondocument.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QJsonObject \
-		/opt/homebrew/lib/QtCore.framework/Headers/qjsonobject.h
+		/opt/homebrew/lib/QtCore.framework/Headers/qjsonobject.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o database_logic.o ../../database_logic.cpp
 
 main.o: ../../main.cpp ../../main_window.h \
@@ -1361,6 +1370,8 @@ main.o: ../../main.cpp ../../main_window.h \
 		../../database_logic.h \
 		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
 		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
@@ -1370,7 +1381,22 @@ main_window.o: ../../main_window.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
-		ui_main_window.h
+		../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		ui_main_window.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlRecord \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlrecord.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDate \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdatetime.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QTimer \
+		/opt/homebrew/lib/QtCore.framework/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_window.o ../../main_window.cpp
 
 qrc_bg_images.o: qrc_bg_images.cpp 

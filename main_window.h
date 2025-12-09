@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QMessageBox>
 
-
+#include "database_logic.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -45,8 +45,43 @@ class Main_Window : public QMainWindow
 
         void on_create_new_record_pushbutton_clicked();
 
+        void on_exit_pushbutton_pg3_clicked();
+
+        void on_cancel_pg3_pushbutton_clicked();
+
+        void on_create_record_pushButton_clicked();
+
+        void on_workTypeChanged(const QString &workName);
+
+        void refreshLoggedUserTable();
+
     private:
         Ui::Main_Window *ui;
+
+        Database db;
+
+        QString current_username;
+        QString current_usersurname;
+        QString current_useraftername;
+        QString current_userphone;
+        int current_id;
+
+
+        QString current_car_name;
+        QString current_car_type;
+        QString current_car_year;
+        QString current_car_number;
+        QString currnet_car_vin;
+
+        QString current_work_type;
+        QString currnet_detail;
+        QString current_quantity;
+
+        QString current_mechanik_choice;
+
+        QString current_date_start;
+        QString current_date_finish;
+
 };
 
 #endif

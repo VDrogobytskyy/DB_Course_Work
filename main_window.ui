@@ -57,7 +57,7 @@
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page_1">
      <widget class="QGroupBox" name="user_groupbox">
@@ -333,44 +333,72 @@
          <height>271</height>
         </rect>
        </property>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>30</number>
+       </attribute>
        <row>
         <property name="text">
-         <string>New Row</string>
+         <string>Car name</string>
         </property>
        </row>
        <column>
         <property name="text">
-         <string>New Column</string>
+         <string>Car year</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>New Column</string>
+         <string>Car number</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>New Column</string>
+         <string>from</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>New Column</string>
+         <string>to</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>New Column</string>
+         <string>Detail</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>New Column</string>
+         <string>Detail cost</string>
         </property>
        </column>
        <column>
         <property name="text">
-         <string>New Column</string>
+         <string>Quantity</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Worker</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Position</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Work</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Work price</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Total cost</string>
         </property>
        </column>
       </widget>
@@ -389,7 +417,454 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_3"/>
+    <widget class="QWidget" name="page_3">
+     <widget class="QLabel" name="Hello_label_up_3">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>110</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>25</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>PrimeMotors Service</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="fill_data_name_label">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>150</y>
+        <width>431</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>25</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="exit_pushbutton_pg3">
+      <property name="geometry">
+       <rect>
+        <x>850</x>
+        <y>680</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Exit</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cancel_pg3_pushbutton">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>680</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>230</y>
+        <width>291</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Car</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>50</y>
+         <width>251</width>
+         <height>191</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="car_name_label">
+            <property name="text">
+             <string>Car name    </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="car_name_lineEdit"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QLabel" name="car_type_label">
+            <property name="text">
+             <string>Car type</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="car_type_comboBox">
+            <item>
+             <property name="text">
+              <string>Truck</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Sedan</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Jeep</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLabel" name="car_year_label">
+            <property name="text">
+             <string>Car year      </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="car_year_lineEdit"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="car_number_label">
+            <property name="text">
+             <string>Car number</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="car_number_lineEdit"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="car_vin_label">
+            <property name="text">
+             <string>Car VIN       </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="car_vin_lineEdit"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>230</y>
+        <width>301</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>What to repair?</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>40</y>
+         <width>296</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Type of work:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="type_of_work_comboBox">
+            <item>
+             <property name="text">
+              <string/>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Timing Belt replacement</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Change tires</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Repair motor</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Paint car</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Plan check</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Oil and Filter change</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Brake service</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Battery/Electrical check</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Suspension repair</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <property name="sizeConstraint">
+           <enum>QLayout::SizeConstraint::SetMinAndMaxSize</enum>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="minimumSize">
+             <size>
+              <width>2</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Detail make: </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="choose_detail_comboBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>10</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>198</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>198</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Quantity:         </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="quantity_lineEdit"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Do you want a main mechanic to work </string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>on your car? This will add 200 to the cost</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="mechanic_checkBox">
+          <property name="text">
+           <string>Yes/No</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="data_groupbox">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>230</y>
+        <width>301</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Choose date</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>281</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>When you can drop of the car:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="drop_car_dateEdit">
+          <property name="displayFormat">
+           <string>yyyy.MM.dd</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>When do you want to pick up the car:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="pickUp_car_dateEdit">
+          <property name="time">
+           <time>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+           </time>
+          </property>
+          <property name="displayFormat">
+           <string>yyyy.MM.dd</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>notice* If you want to pick up the car faster</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>than in 2 days, it will be 500 more expensive.</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="create_record_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>560</y>
+        <width>150</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Create record</string>
+      </property>
+     </widget>
+    </widget>
     <widget class="QWidget" name="page_admin_login">
      <widget class="QGroupBox" name="Admin_logIn_groupbox">
       <property name="geometry">

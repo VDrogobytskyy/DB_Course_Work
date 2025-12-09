@@ -49,7 +49,13 @@ template <> constexpr inline auto Main_Window::qt_create_metaobjectdata<qt_meta_
         "on_user_logIn_pushButton_clicked",
         "on_exit_pushButton_pg2_clicked",
         "on_cancel_pushButton_pg2_clicked",
-        "on_create_new_record_pushbutton_clicked"
+        "on_create_new_record_pushbutton_clicked",
+        "on_exit_pushbutton_pg3_clicked",
+        "on_cancel_pg3_pushbutton_clicked",
+        "on_create_record_pushButton_clicked",
+        "on_workTypeChanged",
+        "workName",
+        "refreshLoggedUserTable"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -73,6 +79,18 @@ template <> constexpr inline auto Main_Window::qt_create_metaobjectdata<qt_meta_
         QtMocHelpers::SlotData<void()>(10, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_create_new_record_pushbutton_clicked'
         QtMocHelpers::SlotData<void()>(11, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exit_pushbutton_pg3_clicked'
+        QtMocHelpers::SlotData<void()>(12, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_cancel_pg3_pushbutton_clicked'
+        QtMocHelpers::SlotData<void()>(13, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_create_record_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(14, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_workTypeChanged'
+        QtMocHelpers::SlotData<void(const QString &)>(15, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 16 },
+        }}),
+        // Slot 'refreshLoggedUserTable'
+        QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -106,10 +124,14 @@ void Main_Window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 7: _t->on_exit_pushButton_pg2_clicked(); break;
         case 8: _t->on_cancel_pushButton_pg2_clicked(); break;
         case 9: _t->on_create_new_record_pushbutton_clicked(); break;
+        case 10: _t->on_exit_pushbutton_pg3_clicked(); break;
+        case 11: _t->on_cancel_pg3_pushbutton_clicked(); break;
+        case 12: _t->on_create_record_pushButton_clicked(); break;
+        case 13: _t->on_workTypeChanged((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 14: _t->refreshLoggedUserTable(); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *Main_Window::metaObject() const
@@ -131,14 +153,14 @@ int Main_Window::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 10)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 15;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 10)
+        if (_id < 15)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 10;
+        _id -= 15;
     }
     return _id;
 }
