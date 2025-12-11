@@ -103,6 +103,9 @@ void Main_Window::on_admin_logIn_pushbutton_clicked()
     QString ADM_password = ui->line_edit_Admin_password->text();
 
 
+
+    // make it for next two days
+
     if(ADM_login == "root_admin" && ADM_password == "0991462324"){
         //...
 
@@ -399,7 +402,7 @@ void Main_Window::on_create_record_pushButton_clicked() {
         QString date_pick = ui->pickUp_car_dateEdit->date().toString("yyyy-MM-dd");
 
         int makeup = 0;
-        if(ui->mechanic_checkBox->isChecked()) makeup += 200; // Головний механік
+        if(ui->mechanic_checkBox->isChecked()) makeup += 200;
 
         QDate dropDate = ui->drop_car_dateEdit->date();
         QDate pickDate = ui->pickUp_car_dateEdit->date();
