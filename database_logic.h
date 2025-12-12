@@ -22,6 +22,8 @@ public:
 
     QString get_required_position_by_work_type(const QString &workName);
 
+    QString get_detail_filter_by_work_type(const QString &workName);
+
     int get_worker_id_by_position(const QString &position);
     int get_work_type_id(const QString &workName, const QString &carType);
     int get_detail_id(const QString &detailName);

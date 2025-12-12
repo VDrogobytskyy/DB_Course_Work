@@ -145,15 +145,12 @@ int Database::get_worker_id_by_position(const QString &position) {
     QSqlQuery query;
     QSqlDatabase db_obj = QSqlDatabase::database();
 
-    // 1. Знайти працівника з найстарішою датою призначення (ротація)
-    // ORDER BY last_assigned_date ASC обирає найстарішу дату
     query.prepare("SELECT id FROM Worker WHERE Worker_position = :pos ORDER BY last_assigned_date ASC LIMIT 1");
     query.bindValue(":pos", position);
 
     if (query.exec() && query.next()) {
         int workerId = query.value(0).toInt();
 
-        // 2. Оновити дату останнього призначення для цього працівника
         QSqlQuery update_query(db_obj);
         update_query.prepare("UPDATE Worker SET last_assigned_date = NOW() WHERE id = :id");
         update_query.bindValue(":id", workerId);
@@ -166,7 +163,7 @@ int Database::get_worker_id_by_position(const QString &position) {
     }
 
     qDebug() << "Worker with position" << position << "not found! Returning default ID (1).";
-    // Якщо працівник з такою посадою не знайдений, повертаємо ID "Main mechanik" (id=1 у вашій БД)
+
     return 1;
 }
 
@@ -258,9 +255,9 @@ bool Database::insert_full_contract(int clientId, int carId, int workerId, int w
     }
 }
 
-QString Database::get_required_position_by_work_type(const QString &workName) {
+QString Database::get_required_position_by_work_type(const QString &workName){
     QSqlQuery query;
-    // Запит до нової таблиці мапування
+
     query.prepare("SELECT required_position FROM WorkType_WorkerPosition_Map WHERE work_type_name = :workName LIMIT 1");
     query.bindValue(":workName", workName);
 
@@ -269,6 +266,37 @@ QString Database::get_required_position_by_work_type(const QString &workName) {
     }
 
     qDebug() << "Required position for work type" << workName << "not found in map. Using default: Motor mechanik";
-    // Резервна посада, якщо мапування не знайдено
+
     return "Motor mechanik";
+}
+
+
+QString Database::get_detail_filter_by_work_type(const QString &workName) {
+    QSqlQuery query;
+
+    query.prepare("SELECT Required_Detail_Pattern FROM WorkType_Detail_Map WHERE Work_type_name = :workName LIMIT 1");
+    query.bindValue(":workName", workName);
+
+    if (query.exec() && query.next()) {
+        QString patterns_str = query.value(0).toString();
+
+        QStringList patterns = patterns_str.split(',', Qt::SkipEmptyParts);
+
+        QString filter;
+        for (const QString &pattern : patterns) {
+            QString trimmed_pattern = pattern.trimmed();
+            if (!trimmed_pattern.isEmpty()) {
+                if (!filter.isEmpty()) {
+                    filter += " OR ";
+                }
+
+                filter += "Detail_name LIKE '%" + trimmed_pattern + "%'";
+            }
+        }
+
+        return filter.isEmpty() ? "1=1" : filter;
+    }
+
+    qDebug() << "Detail filter pattern not found for work type:" << workName;
+    return "1=1";
 }

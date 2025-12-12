@@ -264,56 +264,27 @@ void Main_Window::on_cancel_pg3_pushbutton_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-void Main_Window::on_workTypeChanged(const QString &workName)
-{
+void Main_Window::on_workTypeChanged(const QString &workName){
     ui->choose_detail_comboBox->clear();
 
     QSqlQuery query;
-    QString filter;
 
+    QString filter = db.get_detail_filter_by_work_type(workName);
 
-    if (workName.contains("Oil", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%Oil%' OR Detail_name LIKE '%Coolant%'";
-    }
-    else if (workName.contains("Brake", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%Brake%' OR Detail_name LIKE '%Disc%'";
-    }
-    else if (workName.contains("Timing", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%Belt%' OR Detail_name LIKE '%Piston%' OR Detail_name LIKE '%Motor head%'";
-    }
-    else if (workName.contains("Tires", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%Wheel%' OR Detail_name LIKE '%Wiper%'";
-    }
-    else if (workName.contains("Paint", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%paint%'";
-    }
-    else if (workName.contains("Electrical", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%Battery%' OR Detail_name LIKE '%Spark Plug%' OR Detail_name LIKE '%Light%'";
-    }
-    else if (workName.contains("Suspension", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%Shock Absorber%'";
-    }
-    else if (workName.contains("Repair motor", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%Piston%' OR Detail_name LIKE '%Motor head%' OR Detail_name LIKE '%Spark Plug%' OR Detail_name LIKE '%Fuel Pump%'";
-    }
-    else if (workName.contains("Plan check", Qt::CaseInsensitive)) {
-        filter = "Detail_name LIKE '%Filter%' OR Detail_name LIKE '%Wiper%'";
-    }
-    else {
-        filter = "1=1";
-    }
-
-    query.prepare("SELECT Detail_name FROM Detail WHERE " + filter + " ORDER BY Detail_name ASC");
+    query.prepare("SELECT id, Detail_name FROM Detail WHERE " + filter + " ORDER BY Detail_name ASC");
 
     if (query.exec()) {
         while (query.next()) {
-            ui->choose_detail_comboBox->addItem(query.value(0).toString());
+
+            int id = query.value(0).toInt();
+            QString name = query.value(1).toString();
+            ui->choose_detail_comboBox->addItem(name, id);
         }
     }
 }
 
 
-void Main_Window::refreshLoggedUserTable() {
+void Main_Window::refreshLoggedUserTable(){
     if (current_id <= 0) return;
 
     QSqlQuery ready_query = db.get_all_for_logged_user(current_id);
@@ -372,10 +343,10 @@ void Main_Window::on_create_record_pushButton_clicked() {
 
     QString required_position;
     if(ui->mechanic_checkBox->isChecked()){
-        // Якщо клієнт вибрав "головного механіка" (додаткова плата), призначаємо його
+
         required_position = "Main mechanik";
     } else {
-        // Якщо не вибрав, запитуємо в БД, яка посада потрібна для даного типу роботи
+
         required_position = db.get_required_position_by_work_type(selected_work);
     }
 
