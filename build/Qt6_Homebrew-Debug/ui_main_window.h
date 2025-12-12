@@ -132,6 +132,80 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLabel *adm_label_up;
     QLabel *adm_label_down;
+    QWidget *admin_page_2;
+    QPushButton *exit_pushButton_admin_pg2;
+    QPushButton *cancel_pushButton_admin_pg2;
+    QLabel *Hello_label_up_4;
+    QGroupBox *groupBox_4;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_9;
+    QLabel *label_10;
+    QLabel *label_11;
+    QHBoxLayout *horizontalLayout_20;
+    QLabel *label_12;
+    QLineEdit *lineEdit;
+    QHBoxLayout *horizontalLayout_19;
+    QLabel *label_13;
+    QLineEdit *lineEdit_2;
+    QHBoxLayout *horizontalLayout_18;
+    QLabel *label_14;
+    QLineEdit *lineEdit_3;
+    QHBoxLayout *horizontalLayout_17;
+    QLabel *label_15;
+    QLineEdit *lineEdit_4;
+    QHBoxLayout *horizontalLayout_16;
+    QLabel *label_16;
+    QLineEdit *lineEdit_5;
+    QHBoxLayout *horizontalLayout_15;
+    QLabel *label_17;
+    QComboBox *comboBox;
+    QPushButton *pushButton;
+    QHBoxLayout *horizontalLayout_21;
+    QLabel *label_18;
+    QComboBox *comboBox_2;
+    QPushButton *pushButton_2;
+    QGroupBox *groupBox_5;
+    QWidget *widget1;
+    QVBoxLayout *verticalLayout_10;
+    QLabel *label_19;
+    QLabel *label_20;
+    QHBoxLayout *horizontalLayout_28;
+    QLabel *label_21;
+    QLineEdit *lineEdit_6;
+    QHBoxLayout *horizontalLayout_27;
+    QLabel *label_22;
+    QLineEdit *lineEdit_7;
+    QHBoxLayout *horizontalLayout_26;
+    QLabel *label_23;
+    QLineEdit *lineEdit_8;
+    QPushButton *pushButton_3;
+    QLabel *label_24;
+    QHBoxLayout *horizontalLayout_25;
+    QLabel *label_25;
+    QComboBox *comboBox_3;
+    QHBoxLayout *horizontalLayout_24;
+    QLabel *label_26;
+    QLineEdit *lineEdit_11;
+    QHBoxLayout *horizontalLayout_23;
+    QLabel *label_28;
+    QLineEdit *lineEdit_9;
+    QHBoxLayout *horizontalLayout_22;
+    QLabel *label_27;
+    QLineEdit *lineEdit_10;
+    QPushButton *pushButton_4;
+    QGroupBox *groupBox_6;
+    QWidget *widget2;
+    QVBoxLayout *verticalLayout_11;
+    QLabel *label_29;
+    QLabel *label_30;
+    QHBoxLayout *horizontalLayout_29;
+    QLabel *label_31;
+    QDateEdit *dateEdit;
+    QHBoxLayout *horizontalLayout_30;
+    QLabel *label_32;
+    QDateEdit *dateEdit_2;
+    QPushButton *pushButton_5;
+    QLabel *label_33;
 
     void setupUi(QMainWindow *Main_Window)
     {
@@ -651,11 +725,356 @@ public:
         verticalLayout_2->addWidget(adm_label_down);
 
         stackedWidget->addWidget(page_admin_login);
+        admin_page_2 = new QWidget();
+        admin_page_2->setObjectName("admin_page_2");
+        exit_pushButton_admin_pg2 = new QPushButton(admin_page_2);
+        exit_pushButton_admin_pg2->setObjectName("exit_pushButton_admin_pg2");
+        exit_pushButton_admin_pg2->setGeometry(QRect(840, 680, 100, 32));
+        cancel_pushButton_admin_pg2 = new QPushButton(admin_page_2);
+        cancel_pushButton_admin_pg2->setObjectName("cancel_pushButton_admin_pg2");
+        cancel_pushButton_admin_pg2->setGeometry(QRect(50, 670, 100, 32));
+        Hello_label_up_4 = new QLabel(admin_page_2);
+        Hello_label_up_4->setObjectName("Hello_label_up_4");
+        Hello_label_up_4->setGeometry(QRect(390, 120, 231, 41));
+        Hello_label_up_4->setFont(font);
+        groupBox_4 = new QGroupBox(admin_page_2);
+        groupBox_4->setObjectName("groupBox_4");
+        groupBox_4->setGeometry(QRect(20, 160, 311, 421));
+        widget = new QWidget(groupBox_4);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(20, 30, 271, 368));
+        verticalLayout_9 = new QVBoxLayout(widget);
+        verticalLayout_9->setObjectName("verticalLayout_9");
+        verticalLayout_9->setContentsMargins(0, 0, 0, 0);
+        label_10 = new QLabel(widget);
+        label_10->setObjectName("label_10");
+
+        verticalLayout_9->addWidget(label_10);
+
+        label_11 = new QLabel(widget);
+        label_11->setObjectName("label_11");
+
+        verticalLayout_9->addWidget(label_11);
+
+        horizontalLayout_20 = new QHBoxLayout();
+        horizontalLayout_20->setObjectName("horizontalLayout_20");
+        label_12 = new QLabel(widget);
+        label_12->setObjectName("label_12");
+
+        horizontalLayout_20->addWidget(label_12);
+
+        lineEdit = new QLineEdit(widget);
+        lineEdit->setObjectName("lineEdit");
+
+        horizontalLayout_20->addWidget(lineEdit);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_20);
+
+        horizontalLayout_19 = new QHBoxLayout();
+        horizontalLayout_19->setObjectName("horizontalLayout_19");
+        label_13 = new QLabel(widget);
+        label_13->setObjectName("label_13");
+
+        horizontalLayout_19->addWidget(label_13);
+
+        lineEdit_2 = new QLineEdit(widget);
+        lineEdit_2->setObjectName("lineEdit_2");
+
+        horizontalLayout_19->addWidget(lineEdit_2);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_19);
+
+        horizontalLayout_18 = new QHBoxLayout();
+        horizontalLayout_18->setObjectName("horizontalLayout_18");
+        label_14 = new QLabel(widget);
+        label_14->setObjectName("label_14");
+
+        horizontalLayout_18->addWidget(label_14);
+
+        lineEdit_3 = new QLineEdit(widget);
+        lineEdit_3->setObjectName("lineEdit_3");
+
+        horizontalLayout_18->addWidget(lineEdit_3);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_18);
+
+        horizontalLayout_17 = new QHBoxLayout();
+        horizontalLayout_17->setObjectName("horizontalLayout_17");
+        label_15 = new QLabel(widget);
+        label_15->setObjectName("label_15");
+
+        horizontalLayout_17->addWidget(label_15);
+
+        lineEdit_4 = new QLineEdit(widget);
+        lineEdit_4->setObjectName("lineEdit_4");
+
+        horizontalLayout_17->addWidget(lineEdit_4);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_17);
+
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setObjectName("horizontalLayout_16");
+        label_16 = new QLabel(widget);
+        label_16->setObjectName("label_16");
+
+        horizontalLayout_16->addWidget(label_16);
+
+        lineEdit_5 = new QLineEdit(widget);
+        lineEdit_5->setObjectName("lineEdit_5");
+
+        horizontalLayout_16->addWidget(lineEdit_5);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_16);
+
+        horizontalLayout_15 = new QHBoxLayout();
+        horizontalLayout_15->setObjectName("horizontalLayout_15");
+        label_17 = new QLabel(widget);
+        label_17->setObjectName("label_17");
+
+        horizontalLayout_15->addWidget(label_17);
+
+        comboBox = new QComboBox(widget);
+        comboBox->setObjectName("comboBox");
+
+        horizontalLayout_15->addWidget(comboBox);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_15);
+
+        pushButton = new QPushButton(widget);
+        pushButton->setObjectName("pushButton");
+
+        verticalLayout_9->addWidget(pushButton);
+
+        horizontalLayout_21 = new QHBoxLayout();
+        horizontalLayout_21->setObjectName("horizontalLayout_21");
+        label_18 = new QLabel(widget);
+        label_18->setObjectName("label_18");
+
+        horizontalLayout_21->addWidget(label_18);
+
+        comboBox_2 = new QComboBox(widget);
+        comboBox_2->setObjectName("comboBox_2");
+
+        horizontalLayout_21->addWidget(comboBox_2);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_21);
+
+        pushButton_2 = new QPushButton(widget);
+        pushButton_2->setObjectName("pushButton_2");
+
+        verticalLayout_9->addWidget(pushButton_2);
+
+        groupBox_5 = new QGroupBox(admin_page_2);
+        groupBox_5->setObjectName("groupBox_5");
+        groupBox_5->setGeometry(QRect(350, 160, 311, 421));
+        widget1 = new QWidget(groupBox_5);
+        widget1->setObjectName("widget1");
+        widget1->setGeometry(QRect(20, 40, 271, 351));
+        verticalLayout_10 = new QVBoxLayout(widget1);
+        verticalLayout_10->setObjectName("verticalLayout_10");
+        verticalLayout_10->setContentsMargins(0, 0, 0, 0);
+        label_19 = new QLabel(widget1);
+        label_19->setObjectName("label_19");
+
+        verticalLayout_10->addWidget(label_19);
+
+        label_20 = new QLabel(widget1);
+        label_20->setObjectName("label_20");
+
+        verticalLayout_10->addWidget(label_20);
+
+        horizontalLayout_28 = new QHBoxLayout();
+        horizontalLayout_28->setObjectName("horizontalLayout_28");
+        label_21 = new QLabel(widget1);
+        label_21->setObjectName("label_21");
+
+        horizontalLayout_28->addWidget(label_21);
+
+        lineEdit_6 = new QLineEdit(widget1);
+        lineEdit_6->setObjectName("lineEdit_6");
+
+        horizontalLayout_28->addWidget(lineEdit_6);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_28);
+
+        horizontalLayout_27 = new QHBoxLayout();
+        horizontalLayout_27->setObjectName("horizontalLayout_27");
+        label_22 = new QLabel(widget1);
+        label_22->setObjectName("label_22");
+
+        horizontalLayout_27->addWidget(label_22);
+
+        lineEdit_7 = new QLineEdit(widget1);
+        lineEdit_7->setObjectName("lineEdit_7");
+
+        horizontalLayout_27->addWidget(lineEdit_7);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_27);
+
+        horizontalLayout_26 = new QHBoxLayout();
+        horizontalLayout_26->setObjectName("horizontalLayout_26");
+        label_23 = new QLabel(widget1);
+        label_23->setObjectName("label_23");
+
+        horizontalLayout_26->addWidget(label_23);
+
+        lineEdit_8 = new QLineEdit(widget1);
+        lineEdit_8->setObjectName("lineEdit_8");
+
+        horizontalLayout_26->addWidget(lineEdit_8);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_26);
+
+        pushButton_3 = new QPushButton(widget1);
+        pushButton_3->setObjectName("pushButton_3");
+
+        verticalLayout_10->addWidget(pushButton_3);
+
+        label_24 = new QLabel(widget1);
+        label_24->setObjectName("label_24");
+
+        verticalLayout_10->addWidget(label_24);
+
+        horizontalLayout_25 = new QHBoxLayout();
+        horizontalLayout_25->setObjectName("horizontalLayout_25");
+        label_25 = new QLabel(widget1);
+        label_25->setObjectName("label_25");
+
+        horizontalLayout_25->addWidget(label_25);
+
+        comboBox_3 = new QComboBox(widget1);
+        comboBox_3->setObjectName("comboBox_3");
+
+        horizontalLayout_25->addWidget(comboBox_3);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_25);
+
+        horizontalLayout_24 = new QHBoxLayout();
+        horizontalLayout_24->setObjectName("horizontalLayout_24");
+        label_26 = new QLabel(widget1);
+        label_26->setObjectName("label_26");
+
+        horizontalLayout_24->addWidget(label_26);
+
+        lineEdit_11 = new QLineEdit(widget1);
+        lineEdit_11->setObjectName("lineEdit_11");
+
+        horizontalLayout_24->addWidget(lineEdit_11);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_24);
+
+        horizontalLayout_23 = new QHBoxLayout();
+        horizontalLayout_23->setObjectName("horizontalLayout_23");
+        label_28 = new QLabel(widget1);
+        label_28->setObjectName("label_28");
+
+        horizontalLayout_23->addWidget(label_28);
+
+        lineEdit_9 = new QLineEdit(widget1);
+        lineEdit_9->setObjectName("lineEdit_9");
+
+        horizontalLayout_23->addWidget(lineEdit_9);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_23);
+
+        horizontalLayout_22 = new QHBoxLayout();
+        horizontalLayout_22->setObjectName("horizontalLayout_22");
+        label_27 = new QLabel(widget1);
+        label_27->setObjectName("label_27");
+
+        horizontalLayout_22->addWidget(label_27);
+
+        lineEdit_10 = new QLineEdit(widget1);
+        lineEdit_10->setObjectName("lineEdit_10");
+
+        horizontalLayout_22->addWidget(lineEdit_10);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_22);
+
+        pushButton_4 = new QPushButton(widget1);
+        pushButton_4->setObjectName("pushButton_4");
+
+        verticalLayout_10->addWidget(pushButton_4);
+
+        groupBox_6 = new QGroupBox(admin_page_2);
+        groupBox_6->setObjectName("groupBox_6");
+        groupBox_6->setGeometry(QRect(680, 160, 311, 421));
+        widget2 = new QWidget(groupBox_6);
+        widget2->setObjectName("widget2");
+        widget2->setGeometry(QRect(10, 36, 291, 191));
+        verticalLayout_11 = new QVBoxLayout(widget2);
+        verticalLayout_11->setObjectName("verticalLayout_11");
+        verticalLayout_11->setContentsMargins(0, 0, 0, 0);
+        label_29 = new QLabel(widget2);
+        label_29->setObjectName("label_29");
+
+        verticalLayout_11->addWidget(label_29);
+
+        label_30 = new QLabel(widget2);
+        label_30->setObjectName("label_30");
+
+        verticalLayout_11->addWidget(label_30);
+
+        horizontalLayout_29 = new QHBoxLayout();
+        horizontalLayout_29->setObjectName("horizontalLayout_29");
+        label_31 = new QLabel(widget2);
+        label_31->setObjectName("label_31");
+
+        horizontalLayout_29->addWidget(label_31);
+
+        dateEdit = new QDateEdit(widget2);
+        dateEdit->setObjectName("dateEdit");
+
+        horizontalLayout_29->addWidget(dateEdit);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_29);
+
+        horizontalLayout_30 = new QHBoxLayout();
+        horizontalLayout_30->setObjectName("horizontalLayout_30");
+        label_32 = new QLabel(widget2);
+        label_32->setObjectName("label_32");
+
+        horizontalLayout_30->addWidget(label_32);
+
+        dateEdit_2 = new QDateEdit(widget2);
+        dateEdit_2->setObjectName("dateEdit_2");
+
+        horizontalLayout_30->addWidget(dateEdit_2);
+
+
+        verticalLayout_11->addLayout(horizontalLayout_30);
+
+        pushButton_5 = new QPushButton(widget2);
+        pushButton_5->setObjectName("pushButton_5");
+
+        verticalLayout_11->addWidget(pushButton_5);
+
+        label_33 = new QLabel(widget2);
+        label_33->setObjectName("label_33");
+
+        verticalLayout_11->addWidget(label_33);
+
+        stackedWidget->addWidget(admin_page_2);
         Main_Window->setCentralWidget(centralwidget);
 
         retranslateUi(Main_Window);
 
-        stackedWidget->setCurrentIndex(1);
+        stackedWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(Main_Window);
@@ -756,6 +1175,41 @@ public:
         exit_admpage_pushButton->setText(QCoreApplication::translate("Main_Window", "Exit", nullptr));
         adm_label_up->setText(QCoreApplication::translate("Main_Window", "        PrimeMotors Service ", nullptr));
         adm_label_down->setText(QCoreApplication::translate("Main_Window", "Welcome our favurite Admin :)", nullptr));
+        exit_pushButton_admin_pg2->setText(QCoreApplication::translate("Main_Window", "Exit", nullptr));
+        cancel_pushButton_admin_pg2->setText(QCoreApplication::translate("Main_Window", "Cancel", nullptr));
+        Hello_label_up_4->setText(QCoreApplication::translate("Main_Window", "PrimeMotors Service", nullptr));
+        groupBox_4->setTitle(QCoreApplication::translate("Main_Window", "Worker appoint/dismiss", nullptr));
+        label_10->setText(QCoreApplication::translate("Main_Window", "If you want to appoint worker, please", nullptr));
+        label_11->setText(QCoreApplication::translate("Main_Window", "fill in the information about him/her", nullptr));
+        label_12->setText(QCoreApplication::translate("Main_Window", "Name        ", nullptr));
+        label_13->setText(QCoreApplication::translate("Main_Window", "Surname   ", nullptr));
+        label_14->setText(QCoreApplication::translate("Main_Window", "Aftername", nullptr));
+        label_15->setText(QCoreApplication::translate("Main_Window", "Position    ", nullptr));
+        label_16->setText(QCoreApplication::translate("Main_Window", "Work type", nullptr));
+        label_17->setText(QCoreApplication::translate("Main_Window", "Detail to work with", nullptr));
+        pushButton->setText(QCoreApplication::translate("Main_Window", "Create Worker", nullptr));
+        label_18->setText(QCoreApplication::translate("Main_Window", "To Dismiss", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("Main_Window", "Dismiss", nullptr));
+        groupBox_5->setTitle(QCoreApplication::translate("Main_Window", "Detail change", nullptr));
+        label_19->setText(QCoreApplication::translate("Main_Window", "If you want to add new detail, please", nullptr));
+        label_20->setText(QCoreApplication::translate("Main_Window", "fill in the information about it", nullptr));
+        label_21->setText(QCoreApplication::translate("Main_Window", "Name        ", nullptr));
+        label_22->setText(QCoreApplication::translate("Main_Window", "Cost          ", nullptr));
+        label_23->setText(QCoreApplication::translate("Main_Window", "Remaining", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("Main_Window", "Add detail", nullptr));
+        label_24->setText(QCoreApplication::translate("Main_Window", "If you want to change info about detail:", nullptr));
+        label_25->setText(QCoreApplication::translate("Main_Window", "Choose detail", nullptr));
+        label_26->setText(QCoreApplication::translate("Main_Window", "New name       ", nullptr));
+        label_28->setText(QCoreApplication::translate("Main_Window", "New cost         ", nullptr));
+        label_27->setText(QCoreApplication::translate("Main_Window", "New remaining", nullptr));
+        pushButton_4->setText(QCoreApplication::translate("Main_Window", "Make change", nullptr));
+        groupBox_6->setTitle(QCoreApplication::translate("Main_Window", "Create report", nullptr));
+        label_29->setText(QCoreApplication::translate("Main_Window", "If you want to create report, please", nullptr));
+        label_30->setText(QCoreApplication::translate("Main_Window", "choose which dates you want to connect", nullptr));
+        label_31->setText(QCoreApplication::translate("Main_Window", "From", nullptr));
+        label_32->setText(QCoreApplication::translate("Main_Window", "to", nullptr));
+        pushButton_5->setText(QCoreApplication::translate("Main_Window", "Create PDF", nullptr));
+        label_33->setText(QCoreApplication::translate("Main_Window", "Have a nice day :)", nullptr));
     } // retranslateUi
 
 };

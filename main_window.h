@@ -55,6 +55,10 @@ class Main_Window : public QMainWindow
 
         void refreshLoggedUserTable();
 
+        void on_exit_pushButton_admin_pg2_clicked();
+
+        void on_cancel_pushButton_admin_pg2_clicked();
+
     private:
         Ui::Main_Window *ui;
 

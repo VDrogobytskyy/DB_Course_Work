@@ -143,15 +143,30 @@ bool Database::insert_car(const int &current_id, const QString &current_car_name
 
 int Database::get_worker_id_by_position(const QString &position) {
     QSqlQuery query;
+    QSqlDatabase db_obj = QSqlDatabase::database();
 
-    query.prepare("SELECT id FROM Worker WHERE Worker_position = :pos LIMIT 1");
+    // 1. Знайти працівника з найстарішою датою призначення (ротація)
+    // ORDER BY last_assigned_date ASC обирає найстарішу дату
+    query.prepare("SELECT id FROM Worker WHERE Worker_position = :pos ORDER BY last_assigned_date ASC LIMIT 1");
     query.bindValue(":pos", position);
 
     if (query.exec() && query.next()) {
-        return query.value(0).toInt();
+        int workerId = query.value(0).toInt();
+
+        // 2. Оновити дату останнього призначення для цього працівника
+        QSqlQuery update_query(db_obj);
+        update_query.prepare("UPDATE Worker SET last_assigned_date = NOW() WHERE id = :id");
+        update_query.bindValue(":id", workerId);
+
+        if (!update_query.exec()) {
+            qDebug() << "Error updating worker assignment date:" << update_query.lastError().text();
+        }
+
+        return workerId;
     }
 
-    qDebug() << "Worker with position" << position << "not found!";
+    qDebug() << "Worker with position" << position << "not found! Returning default ID (1).";
+    // Якщо працівник з такою посадою не знайдений, повертаємо ID "Main mechanik" (id=1 у вашій БД)
     return 1;
 }
 
@@ -241,4 +256,19 @@ bool Database::insert_full_contract(int clientId, int carId, int workerId, int w
         db_obj.rollback();
         return false;
     }
+}
+
+QString Database::get_required_position_by_work_type(const QString &workName) {
+    QSqlQuery query;
+    // Запит до нової таблиці мапування
+    query.prepare("SELECT required_position FROM WorkType_WorkerPosition_Map WHERE work_type_name = :workName LIMIT 1");
+    query.bindValue(":workName", workName);
+
+    if (query.exec() && query.next()) {
+        return query.value(0).toString();
+    }
+
+    qDebug() << "Required position for work type" << workName << "not found in map. Using default: Motor mechanik";
+    // Резервна посада, якщо мапування не знайдено
+    return "Motor mechanik";
 }

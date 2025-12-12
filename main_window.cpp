@@ -58,6 +58,9 @@ Main_Window::Main_Window(QWidget *parent)
     ui->exit_pushbutton_pg3->setStyleSheet("background: none;" "color: white;");
     ui->exit_pushbutton_pg3->setGeometry(850, 700, 100, 50);
 
+    ui->exit_pushButton_admin_pg2->setStyleSheet("background: none;" "color: white;");
+    ui->exit_pushButton_admin_pg2->setGeometry(850, 700, 100, 50);
+
     // FAQ BUTTON
 
     ui->FAQ_tool_button->setStyleSheet("background: none;" "color: white;");
@@ -70,6 +73,9 @@ Main_Window::Main_Window(QWidget *parent)
 
     ui->cancel_pg3_pushbutton->setStyleSheet("background: none;" "color: white;");
     ui->cancel_pg3_pushbutton->setGeometry(50, 700, 100, 50);
+
+    ui->cancel_pushButton_admin_pg2->setStyleSheet("background: none;" "color: white;");
+    ui->cancel_pushButton_admin_pg2->setGeometry(50, 700, 100, 50);
 
     // CREATE NEW RECORD BUTTON
 
@@ -103,11 +109,9 @@ void Main_Window::on_admin_logIn_pushbutton_clicked()
     QString ADM_password = ui->line_edit_Admin_password->text();
 
 
-
-    // make it for next two days
-
     if(ADM_login == "root_admin" && ADM_password == "0991462324"){
-        //...
+        ui->stackedWidget->setCurrentIndex(4);
+
 
     }else{
         QMessageBox adm_login_err(this);
@@ -368,26 +372,11 @@ void Main_Window::on_create_record_pushButton_clicked() {
 
     QString required_position;
     if(ui->mechanic_checkBox->isChecked()){
+        // Якщо клієнт вибрав "головного механіка" (додаткова плата), призначаємо його
         required_position = "Main mechanik";
     } else {
-        if (selected_work.contains("Repair motor", Qt::CaseInsensitive) ||
-            selected_work.contains("Timing", Qt::CaseInsensitive))
-            required_position = "Engine Specialist";
-        else if (selected_work.contains("Suspension", Qt::CaseInsensitive))
-            required_position = "Suspension Expert";
-        else if (selected_work.contains("Electrical", Qt::CaseInsensitive))
-            required_position = "Auto Electrician";
-        else if (selected_work.contains("Brake", Qt::CaseInsensitive))
-            required_position = "Brake Technician";
-        else if (selected_work.contains("Paint", Qt::CaseInsensitive))
-            required_position = "Paint Master";
-        else if (selected_work.contains("Tires", Qt::CaseInsensitive))
-            required_position = "Wheel mechanik";
-        else if (selected_work.contains("Plan check", Qt::CaseInsensitive) ||
-                 selected_work.contains("Oil", Qt::CaseInsensitive))
-            required_position = "Maintenance Lead";
-        else
-            required_position = "Motor mechanik";
+        // Якщо не вибрав, запитуємо в БД, яка посада потрібна для даного типу роботи
+        required_position = db.get_required_position_by_work_type(selected_work);
     }
 
     int assigned_worker_id = db.get_worker_id_by_position(required_position);
@@ -440,3 +429,15 @@ void Main_Window::on_create_record_pushButton_clicked() {
 
     ui->create_record_pushButton->setEnabled(true);
 }
+
+void Main_Window::on_exit_pushButton_admin_pg2_clicked()
+{
+    close();
+}
+
+
+void Main_Window::on_cancel_pushButton_admin_pg2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+

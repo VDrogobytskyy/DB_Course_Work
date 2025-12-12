@@ -20,6 +20,8 @@ public:
 
     bool insert_car(const int &current_id, const QString &current_car_name, const QString &current_car_type, const QString &current_car_year, const QString &current_car_number, const QString &currnet_car_vin);
 
+    QString get_required_position_by_work_type(const QString &workName);
+
     int get_worker_id_by_position(const QString &position);
     int get_work_type_id(const QString &workName, const QString &carType);
     int get_detail_id(const QString &detailName);
