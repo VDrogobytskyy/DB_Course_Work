@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = /Library/Developer/CommandLineTools/usr/bin/clang
 CXX           = /Library/Developer/CommandLineTools/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -g -std=gnu++1z $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wall -Wextra $(DEFINES)
-INCPATH       = -I../../../CW -I. -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtSql.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib
+INCPATH       = -I../../../CW -I. -I/opt/homebrew/lib/QtPrintSupport.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtSql.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/opt/homebrew/share/qt/mkspecs/macx-clang -F/opt/homebrew/lib
 QMAKE         = /opt/homebrew/opt/qtbase/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = CW1.0.0
 DISTDIR = /Users/volodymyrmac/Documents/QT_Projects/CW/build/Qt6_Homebrew-Debug/.tmp/CW1.0.0
 LINK          = /Library/Developer/CommandLineTools/usr/bin/clang++
 LFLAGS        = -stdlib=libc++ -headerpad_max_install_names $(EXPORT_ARCH_ARGS) -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mmacosx-version-min=14.0 -Wl,-rpath,@executable_path/../Frameworks -Wl,-rpath,/opt/homebrew/lib
-LIBS          = $(SUBLIBS) -F/opt/homebrew/lib -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtSql -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -framework OpenGL   
+LIBS          = $(SUBLIBS) -F/opt/homebrew/lib -framework QtPrintSupport -framework ApplicationServices -framework QtWidgets -framework QtGui -framework AppKit -framework ImageIO -framework Metal -framework QtSql -framework QtCore -framework IOKit -framework DiskArbitration -framework UniformTypeIdentifiers -lcups -framework OpenGL   
 AR            = /Library/Developer/CommandLineTools/usr/bin/ar cq
 RANLIB        = /Library/Developer/CommandLineTools/usr/bin/ranlib -s
 SED           = sed
@@ -840,6 +840,7 @@ Makefile: ../../CW.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt
 		../../bg_images.qrc \
 		../../db_conf.qrc \
 		../../page1_bg.qrc \
+		/opt/homebrew/lib/QtPrintSupport.framework/Resources/QtPrintSupport.prl \
 		/opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		/opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl \
 		/opt/homebrew/lib/QtSql.framework/Resources/QtSql.prl \
@@ -1220,6 +1221,7 @@ Makefile: ../../CW.pro /opt/homebrew/share/qt/mkspecs/macx-clang/qmake.conf /opt
 ../../bg_images.qrc:
 ../../db_conf.qrc:
 ../../page1_bg.qrc:
+/opt/homebrew/lib/QtPrintSupport.framework/Resources/QtPrintSupport.prl:
 /opt/homebrew/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 /opt/homebrew/lib/QtGui.framework/Resources/QtGui.prl:
 /opt/homebrew/lib/QtSql.framework/Resources/QtSql.prl:
@@ -1318,7 +1320,7 @@ moc_main_window.cpp: ../../main_window.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
 		moc_predefs.h \
 		/opt/homebrew/share/qt/libexec/moc
-	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/volodymyrmac/Documents/QT_Projects/CW/build/Qt6_Homebrew-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/volodymyrmac/Documents/QT_Projects/CW -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtSql.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../main_window.h -o moc_main_window.cpp
+	/opt/homebrew/share/qt/libexec/moc $(DEFINES) --include /Users/volodymyrmac/Documents/QT_Projects/CW/build/Qt6_Homebrew-Debug/moc_predefs.h -I/opt/homebrew/share/qt/mkspecs/macx-clang -I/Users/volodymyrmac/Documents/QT_Projects/CW -I/opt/homebrew/lib/QtPrintSupport.framework/Headers -I/opt/homebrew/lib/QtWidgets.framework/Headers -I/opt/homebrew/lib/QtGui.framework/Headers -I/opt/homebrew/lib/QtSql.framework/Headers -I/opt/homebrew/lib/QtCore.framework/Headers -I. -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -I/Library/Developer/CommandLineTools/usr/lib/clang/17/include -I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -I/Library/Developer/CommandLineTools/usr/include -F/opt/homebrew/lib ../../main_window.h -o moc_main_window.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1396,7 +1398,13 @@ main_window.o: ../../main_window.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QDate \
 		/opt/homebrew/lib/QtCore.framework/Headers/qdatetime.h \
 		/opt/homebrew/lib/QtCore.framework/Headers/QTimer \
-		/opt/homebrew/lib/QtCore.framework/Headers/qtimer.h
+		/opt/homebrew/lib/QtCore.framework/Headers/qtimer.h \
+		/opt/homebrew/lib/QtPrintSupport.framework/Headers/QPrinter \
+		/opt/homebrew/lib/QtPrintSupport.framework/Headers/qprinter.h \
+		/opt/homebrew/lib/QtGui.framework/Headers/QPainter \
+		/opt/homebrew/lib/QtGui.framework/Headers/qpainter.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QFileDialog \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_window.o ../../main_window.cpp
 
 qrc_bg_images.o: qrc_bg_images.cpp 

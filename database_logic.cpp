@@ -270,7 +270,6 @@ QString Database::get_required_position_by_work_type(const QString &workName){
     return "Motor mechanik";
 }
 
-
 QString Database::get_detail_filter_by_work_type(const QString &workName) {
     QSqlQuery query;
 
@@ -294,9 +293,291 @@ QString Database::get_detail_filter_by_work_type(const QString &workName) {
             }
         }
 
-        return filter.isEmpty() ? "1=1" : filter;
+        return filter.isEmpty() ? "1=0" : filter;
     }
 
     qDebug() << "Detail filter pattern not found for work type:" << workName;
-    return "1=1";
+
+    return "1=0";
+}
+
+bool Database::add_detail_in_db(const QString &name, const QString &cost, const QString &remaining){
+    QSqlQuery detail_query;
+    detail_query.prepare("INSERT INTO Detail (Detail_name, Detail_cost, Detail_remaining)"
+                       "VALUES (:D_N, :D_C, :D_R)");
+    detail_query.bindValue(":D_N", name);
+    detail_query.bindValue(":D_C", cost);
+    detail_query.bindValue(":D_R", remaining);
+
+    if (!detail_query.exec()) {
+        qDebug() << "User add query error:" << detail_query.lastError().text();
+        return false;
+    }
+
+    return true;
+}
+
+bool Database::add_worker_in_db(const QString &worker_name, const QString &worker_surname, const QString &worker_aftername, const QString &worker_position){
+
+    QSqlQuery worker_query;
+    worker_query.prepare("INSERT INTO Worker (Worker_name, Worker_surname, Worker_aftername, Worker_position)"
+                         "VALUES (:W_N, :W_SN, :W_AN, :W_P)");
+    worker_query.bindValue(":W_N", worker_name);
+    worker_query.bindValue(":W_SN", worker_surname);
+    worker_query.bindValue(":W_AN", worker_aftername);
+    worker_query.bindValue(":W_P", worker_position);
+
+
+    if (!worker_query.exec()) {
+        qDebug() << "User add query error:" << worker_query.lastError().text();
+        return false;
+    }
+
+    return true;
+}
+
+
+bool Database::add_work_type_in_db(const QString &work_name, const QString &work_price_str) {
+    QSqlDatabase db_obj = QSqlDatabase::database();
+
+    bool ok;
+    int base_price = work_price_str.toInt(&ok);
+    if (!ok) {
+        qDebug() << "Error: Invalid work price value:" << work_price_str;
+        return false;
+    }
+
+    QStringList car_types = {"Sedan", "Jeep", "Truck"};
+
+    if (!db_obj.transaction()) return false;
+
+    QSqlQuery query(db_obj);
+    query.prepare("INSERT INTO Work_type (Work_name, Work_price, Car_Type) VALUES (:W_N, :W_P, :C_T)");
+
+    bool success = true;
+
+    for (const QString &car_type : car_types) {
+        int current_price = base_price;
+
+        if (car_type == "Jeep") {
+            current_price = (int)(base_price * 1.5);
+        } else if (car_type == "Truck") {
+            current_price = (int)(base_price * 2.0);
+        }
+
+        query.bindValue(":W_N", work_name);
+        query.bindValue(":W_P", current_price);
+        query.bindValue(":C_T", car_type);
+
+        if (!query.exec()) {
+            qDebug() << "Error adding work type for" << car_type << ":" << query.lastError().text();
+            success = false;
+            break;
+        }
+    }
+
+    if (success) {
+        return db_obj.commit();
+    } else {
+        db_obj.rollback();
+        return false;
+    }
+}
+
+bool Database::map_worktype_to_position(const QString &work_name, const QString &position) {
+    QSqlQuery query;
+
+    query.prepare("SELECT id FROM WorkType_WorkerPosition_Map WHERE work_type_name = :W_N AND required_position = :P LIMIT 1");
+    query.bindValue(":W_N", work_name);
+    query.bindValue(":P", position);
+
+    if (query.exec() && query.next()) {
+        qDebug() << "Mapping for work type and position already exists, skipping insert.";
+        return true;
+    }
+
+    query.prepare("INSERT INTO WorkType_WorkerPosition_Map (work_type_name, required_position) VALUES (:W_N, :P)");
+    query.bindValue(":W_N", work_name);
+    query.bindValue(":P", position);
+
+    if (!query.exec()) {
+        qDebug() << "Error mapping work type to position:" << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::map_worktype_to_detail(const QString &work_name, const QString &detail_pattern) {
+    QSqlQuery query;
+
+    query.prepare("SELECT id FROM WorkType_Detail_Map WHERE Work_type_name = :W_N LIMIT 1");
+    query.bindValue(":W_N", work_name);
+
+    if (query.exec() && query.next()) {
+        qDebug() << "Detail map for work type" << work_name << "already exists, skipping insert.";
+        return true;
+    }
+
+    query.prepare("INSERT INTO WorkType_Detail_Map (Work_type_name, Required_Detail_Pattern) VALUES (:W_N, :P)");
+    query.bindValue(":W_N", work_name);
+    query.bindValue(":P", detail_pattern);
+
+    if (!query.exec()) {
+        qDebug() << "Error mapping work type to detail:" << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
+bool Database::dismiss_worker(int workerId) {
+
+    const int MAIN_MECHANIC_ID = 1;
+
+    if (workerId == MAIN_MECHANIC_ID) {
+        qDebug() << "Error: You can`t dismiss Main Mechanik.";
+        return false;
+    }
+
+    QSqlDatabase::database().transaction();
+
+    QSqlQuery updateQuery;
+    updateQuery.prepare("UPDATE Contract SET Worker_id = :newId WHERE Worker_id = :oldId;");
+    updateQuery.bindValue(":newId", MAIN_MECHANIC_ID);
+    updateQuery.bindValue(":oldId", workerId);
+
+    if (!updateQuery.exec()) {
+        qDebug() << "Error with uodating contracts:" << updateQuery.lastError().text();
+        QSqlDatabase::database().rollback();
+        return false;
+    }
+
+    QSqlQuery deleteQuery;
+    deleteQuery.prepare("DELETE FROM Worker WHERE id = :id;");
+    deleteQuery.bindValue(":id", workerId);
+
+    if (!deleteQuery.exec()) {
+        qDebug() << "Error dismissing worker:" << deleteQuery.lastError().text();
+        QSqlDatabase::database().rollback();
+        return false;
+    }
+
+    QSqlDatabase::database().commit();
+    return true;
+}
+
+bool Database::change_detail_value(const QString detail_old_name, const QString detail_new_name, const QString detail_new_cost, const QString detail_new_remaining){
+    QSqlQuery change_detail_value;
+
+    change_detail_value.prepare("UPDATE Detail "
+                                "SET Detail_name = :newName, "
+                                "Detail_cost = :newCost, "
+                                "Detail_remaining = :newRemaining "
+                                "WHERE Detail_name = :oldName;");
+
+    change_detail_value.bindValue(":newName", detail_new_name);
+    change_detail_value.bindValue(":newCost", detail_new_cost);
+    change_detail_value.bindValue(":newRemaining", detail_new_remaining);
+
+    change_detail_value.bindValue(":oldName", detail_old_name);
+
+    if (change_detail_value.exec()) {
+        qDebug() << "Detail info updated:" << detail_old_name;
+        return true;
+    } else {
+        qDebug() << "Error detail updating:" << change_detail_value.lastError().text();
+        return false;
+    }
+}
+
+
+QDate Database::getOldestContractFinishDate() {
+    QSqlQuery query;
+    QDate resultDate;
+
+    if (query.exec("SELECT MIN(date_finish) FROM Contract")) {
+        if (query.next()) {
+            resultDate = query.value(0).toDate();
+        }
+    } else {
+        qDebug() << "DB ERROR: Failed to get oldest contract date:" << query.lastError().text();
+    }
+
+    if (!resultDate.isValid()) {
+        return QDate::currentDate();
+    }
+    return resultDate;
+}
+
+QSqlQuery Database::getContractReport(const QDate& startDate, const QDate& endDate) {
+    QSqlQuery query;
+
+    query.prepare("SELECT "
+                  "con.id AS 'ID', "
+                  "cl.Client_surname AS 'Client',"
+                  "c.Car_year AS 'Car year',"
+                  "c.Car_registration_number AS 'Car number',"
+                  "con.date_start AS 'from',"
+                  "con.date_finish AS 'to',"
+                  "d.Detail_name AS 'Detail',"
+                  "COALESCE(d.Detail_cost, 0) AS 'Detail cost',"
+                  "w.Worker_surname AS 'Worker',"
+                  "w.Worker_position AS 'Position',"
+                  "wt.Work_name AS 'Work',"
+                  "COALESCE(wt.Work_price, 0) AS 'Work price',"
+
+                  "CAST(COALESCE(sub.TotalDetailCost, 0) AS REAL) + CAST(COALESCE(wt.Work_price, 0) AS REAL) + CAST(COALESCE(con.makeup, 0) AS REAL) AS 'Total Cost' "
+                  "FROM "
+                  "Contract con "
+                  "JOIN Client cl ON con.Client_id = cl.id "
+                  "JOIN Car c ON con.Car_id = c.id "
+                  "JOIN Worker w ON con.Worker_id = w.id "
+                  "JOIN Work_type wt ON con.Work_type_id = wt.id "
+
+                  "LEFT JOIN ( "
+                  "SELECT "
+                  "con_d.Contract_id, "
+                  "SUM(COALESCE(d.Detail_cost, 0) * COALESCE(con_d.Quantity, 0)) AS TotalDetailCost "
+                  "FROM "
+                  "Contract_Detail con_d "
+                  "JOIN Detail d ON con_d.Detail_id = d.id "
+                  "GROUP BY "
+                  "con_d.Contract_id "
+                  ") sub ON con.id = sub.Contract_id "
+
+                  "LEFT JOIN Contract_Detail con_d ON con.id = con_d.Contract_id "
+                  "LEFT JOIN Detail d ON con_d.Detail_id = d.id "
+
+                  "WHERE "
+                  "con.date_finish BETWEEN :start AND :end "
+                  "ORDER BY "
+                  "con.id ASC, d.Detail_name ASC;");
+
+    query.bindValue(":start", startDate.toString("yyyy-MM-dd"));
+    query.bindValue(":end", endDate.toString("yyyy-MM-dd"));
+
+    if (!query.exec()) {
+        qDebug() << "DB ERROR: Failed to get contract report data:" << query.lastError().text();
+    }
+    return query;
+}
+
+bool Database::is_admin(const QString &name, const QString &password){
+
+    QSqlQuery is_admin;
+
+    is_admin.prepare("select id, ADMIN_NAME, ADMIN_PASSWORD FROM ADMINS WHERE ADMIN_NAME = :AD_N and ADMIN_PASSWORD = :AD_P;");
+
+    is_admin.bindValue(":AD_N", name);
+    is_admin.bindValue(":AD_P", password);
+
+    if(!is_admin.exec()){
+        qDebug() << "Incorrect admin data" << is_admin.lastError();
+        return false;
+    }
+
+    if(is_admin.next()){
+        return true;
+    }else{
+        return false;
+    }
 }

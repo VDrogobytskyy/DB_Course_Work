@@ -1049,19 +1049,19 @@
         <x>20</x>
         <y>160</y>
         <width>311</width>
-        <height>421</height>
+        <height>451</height>
        </rect>
       </property>
       <property name="title">
        <string>Worker appoint/dismiss</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
          <y>30</y>
          <width>271</width>
-         <height>368</height>
+         <height>401</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1089,7 +1089,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit"/>
+           <widget class="QLineEdit" name="add_w_name_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1103,7 +1103,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_2"/>
+           <widget class="QLineEdit" name="add_w_surname_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1117,7 +1117,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_3"/>
+           <widget class="QLineEdit" name="add_w_aftername_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1131,7 +1131,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_4"/>
+           <widget class="QLineEdit" name="add_w_position_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1145,7 +1145,21 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_5"/>
+           <widget class="QLineEdit" name="add_w_work_type_lineEdit"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_31">
+          <item>
+           <widget class="QLabel" name="label_34">
+            <property name="text">
+             <string>Work cost</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="add_wt_cost_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1159,12 +1173,12 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="QComboBox" name="add_worker_detail_comboBox"/>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="create_worker_pushButton">
           <property name="text">
            <string>Create Worker</string>
           </property>
@@ -1180,12 +1194,12 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_2"/>
+           <widget class="QComboBox" name="dismiss_worker_combobox"/>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="dismis_worker_pushButton">
           <property name="text">
            <string>Dismiss</string>
           </property>
@@ -1200,19 +1214,19 @@
         <x>350</x>
         <y>160</y>
         <width>311</width>
-        <height>421</height>
+        <height>451</height>
        </rect>
       </property>
       <property name="title">
        <string>Detail change</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
          <y>40</y>
          <width>271</width>
-         <height>351</height>
+         <height>383</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1240,7 +1254,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_6"/>
+           <widget class="QLineEdit" name="add_detail_name_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1254,7 +1268,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_7"/>
+           <widget class="QLineEdit" name="add_detail_cost_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1268,12 +1282,12 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="add_detail_remaining_lineEdit"/>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="add_detail_pushButton">
           <property name="text">
            <string>Add detail</string>
           </property>
@@ -1296,7 +1310,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_3"/>
+           <widget class="QComboBox" name="choose_detail_to_change_comboBox"/>
           </item>
          </layout>
         </item>
@@ -1310,7 +1324,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_11"/>
+           <widget class="QLineEdit" name="new_detail_name_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1324,7 +1338,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_9"/>
+           <widget class="QLineEdit" name="new_detail_cost_lineEdit"/>
           </item>
          </layout>
         </item>
@@ -1338,12 +1352,12 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_10"/>
+           <widget class="QLineEdit" name="new_detail_remaining_lineEdit"/>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="change_detail_value_pushButton">
           <property name="text">
            <string>Make change</string>
           </property>
@@ -1358,13 +1372,13 @@
         <x>680</x>
         <y>160</y>
         <width>311</width>
-        <height>421</height>
+        <height>451</height>
        </rect>
       </property>
       <property name="title">
        <string>Create report</string>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -1398,7 +1412,11 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="dateEdit"/>
+           <widget class="QDateEdit" name="from_report_dateEdit">
+            <property name="displayFormat">
+             <string>yyyy.MM.dd</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -1412,12 +1430,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="dateEdit_2"/>
+           <widget class="QDateEdit" name="to_report_dateEdit">
+            <property name="displayFormat">
+             <string>yyyy.MM.dd</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_5">
+         <widget class="QPushButton" name="create_pdf_pushButton">
           <property name="text">
            <string>Create PDF</string>
           </property>

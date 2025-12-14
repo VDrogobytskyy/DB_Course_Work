@@ -8,6 +8,14 @@
 #include <QDate>
 #include <QTimer>
 
+#include <QPrinter>
+#include <QPainter>
+#include <QFileDialog>
+#include <QMessageBox>
+
+#include <QSet>
+
+
 Main_Window::Main_Window(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Main_Window)
@@ -26,10 +34,25 @@ Main_Window::Main_Window(QWidget *parent)
     }
 
     connect(ui->type_of_work_comboBox, &QComboBox::currentTextChanged, this, &Main_Window::on_workTypeChanged);
+
+    populateWorkerDetailComboBox();
+
+    connect(ui->add_w_work_type_lineEdit, &QLineEdit::textChanged,
+            this, &Main_Window::populateWorkerDetailComboBox);
+
+    populateWorkTypeComboBox();
+
+    connect(ui->type_of_work_comboBox, &QComboBox::currentTextChanged, this, &Main_Window::on_workTypeChanged);
+
+    populateDetailChangeWorkerComboBox();
+
+
+
     QDate today = QDate::currentDate();
     ui->drop_car_dateEdit->setDate(today);
     ui->drop_car_dateEdit->setMinimumDate(today);
     ui->drop_car_dateEdit->setDisplayFormat("yyyy.MM.dd");
+    ui->to_report_dateEdit->setDate(today);
 
 
     QDate tomorrow = today.addDays(1);
@@ -108,24 +131,44 @@ void Main_Window::on_admin_logIn_pushbutton_clicked()
     QString ADM_login = ui->line_edit_Admin_ID->text();
     QString ADM_password = ui->line_edit_Admin_password->text();
 
+    if(!ADM_login.isEmpty() && !ADM_password.isEmpty()){
 
-    if(ADM_login == "root_admin" && ADM_password == "0991462324"){
-        ui->stackedWidget->setCurrentIndex(4);
+        if(db.is_admin(ADM_login, ADM_password)){
+            ui->stackedWidget->setCurrentIndex(4);
+
+            populateDismissWorkerComboBox();
+            populateDetailChangeWorkerComboBox();
+            QDate oldestFinishDate = db.getOldestContractFinishDate();
 
 
+            ui->from_report_dateEdit->setDate(oldestFinishDate);
+
+            ui->from_report_dateEdit->setMinimumDate(oldestFinishDate);
+
+            ui->from_report_dateEdit->setMinimumDate(ui->from_report_dateEdit->date());
+
+            connect(ui->from_report_dateEdit, &QDateEdit::dateChanged,
+                    ui->from_report_dateEdit, &QDateEdit::setMinimumDate);
+
+            ui->to_report_dateEdit->setMinimumDate(oldestFinishDate.addDays(1));
+
+        }else{
+            QMessageBox adm_login_err(this);
+
+            adm_login_err.setIcon(QMessageBox::Warning);
+
+            adm_login_err.setText("<b>Login Error</b>");
+            adm_login_err.setInformativeText("Incorrect Admin login or password.");
+
+            adm_login_err.setStyleSheet("background: none;" "color: white;");
+
+            adm_login_err.exec();
+
+        }
     }else{
-        QMessageBox adm_login_err(this);
-
-        adm_login_err.setIcon(QMessageBox::Warning);
-
-        adm_login_err.setText("<b>Login Error</b>");
-        adm_login_err.setInformativeText("Incorrect Admin login or password.");
-
-        adm_login_err.setStyleSheet("background: none;" "color: white;");
-
-        adm_login_err.exec();
-
+        QMessageBox::warning(this, "Input Error", "Please fill all required fields!");
     }
+
 }
 
 
@@ -412,3 +455,390 @@ void Main_Window::on_cancel_pushButton_admin_pg2_clicked()
     ui->stackedWidget->setCurrentIndex(3);
 }
 
+
+void Main_Window::on_create_worker_pushButton_clicked(){
+
+    QString add_worker_name = ui->add_w_name_lineEdit->text();
+    QString add_worker_surname = ui->add_w_surname_lineEdit->text();
+    QString add_worker_aftername = ui->add_w_aftername_lineEdit->text();
+    QString add_worker_position = ui->add_w_position_lineEdit->text();
+    QString add_worker_work_type = ui->add_w_work_type_lineEdit->text();
+    QString add_work_type_cost = ui->add_wt_cost_lineEdit->text();
+
+    QString detail_pattern_for_new_work = ui->add_worker_detail_comboBox->currentText();
+
+    if(!add_worker_name.isEmpty() && !add_worker_surname.isEmpty() && !add_worker_aftername.isEmpty()
+        && !add_worker_position.isEmpty() && !add_worker_work_type.isEmpty() && !add_work_type_cost.isEmpty()){
+
+        bool worker_success = false;
+        bool worktype_success = false;
+        bool map_success = false;
+        bool map_detail_success = false;
+
+        worker_success = db.add_worker_in_db(add_worker_name, add_worker_surname, add_worker_aftername, add_worker_position);
+
+        if (worker_success) {
+
+            worktype_success = db.add_work_type_in_db(add_worker_work_type, add_work_type_cost);
+
+            map_success = db.map_worktype_to_position(add_worker_work_type, add_worker_position);
+
+            map_detail_success = db.map_worktype_to_detail(add_worker_work_type, detail_pattern_for_new_work);
+        }
+
+        if (worker_success && worktype_success && map_success && map_detail_success) {
+
+            populateWorkTypeComboBox();
+
+            populateDismissWorkerComboBox();
+
+            QString success_msg = QString("Worker, Work type and mapping is succesfull. ") +
+                                  QString("Work type '%1' now mapping with detail: '%2'.")
+                                      .arg(add_worker_work_type, detail_pattern_for_new_work);
+
+
+            QMessageBox::information(this, "Success", success_msg);
+
+            ui->add_w_name_lineEdit->clear();
+            ui->add_w_surname_lineEdit->clear();
+            ui->add_w_aftername_lineEdit->clear();
+            ui->add_w_position_lineEdit->clear();
+            ui->add_w_work_type_lineEdit->clear();
+            ui->add_wt_cost_lineEdit->clear();
+
+        } else {
+
+            QString error_message = "Error adding data. ";
+            if (!worker_success) error_message += "Error adding worker. ";
+            if (worker_success && !worktype_success) error_message += "Error adding work type. ";
+            if (worker_success && worktype_success && !map_success) error_message += "Error adding mapping. ";
+            if (worker_success && worktype_success && map_success && !map_detail_success) error_message += "Error adding mapping. ";
+
+            QMessageBox::critical(this, "Error DB", error_message);
+        }
+
+    }else{
+        QMessageBox::warning(this, "Input error", "Please fill all required fields!");
+    }
+
+}
+
+void Main_Window::on_add_detail_pushButton_clicked(){
+
+    QString add_detail_name = ui->add_detail_name_lineEdit->text();
+    QString add_detail_cost = ui->add_detail_cost_lineEdit->text();
+    QString add_detail_remainig = ui->add_detail_remaining_lineEdit->text();
+
+    if(!add_detail_name.isEmpty() && !add_detail_cost.isEmpty() && !add_detail_remainig.isEmpty()){
+        if(db.add_detail_in_db(add_detail_name, add_detail_cost, add_detail_remainig)){
+            QMessageBox::information(this, "Success", "Detail registered successfully!");
+            populateDetailChangeWorkerComboBox();
+        }else{
+            QMessageBox::warning(this, "Error", "Something went wrong");
+        }
+
+    }else{
+        QMessageBox::warning(this, "Input Error", "Please fill all required fields!");
+
+    }
+}
+
+void Main_Window::populateWorkerDetailComboBox(const QString &workType){
+    ui->add_worker_detail_comboBox->clear();
+
+    QSqlQuery query;
+    QString filter;
+
+    QString required_filter = db.get_detail_filter_by_work_type(workType);
+
+    if (required_filter == "1=0") {
+
+        filter = "1=1";
+        qDebug() << "Work type" << workType << "has no mapping. Displaying ALL details.";
+    } else {
+        filter = required_filter;
+    }
+
+    query.prepare("SELECT id, Detail_name FROM Detail WHERE " + filter + " ORDER BY Detail_name ASC");
+
+    if (query.exec()) {
+        while (query.next()) {
+            int id = query.value(0).toInt();
+            QString name = query.value(1).toString();
+
+            ui->add_worker_detail_comboBox->addItem(name, id);
+        }
+    } else {
+        qDebug() << "DB error:" << query.lastError().text();
+    }
+}
+
+void Main_Window::populateWorkTypeComboBox(){
+
+    ui->type_of_work_comboBox->clear();
+
+    QSqlQuery query;
+
+    query.prepare("SELECT DISTINCT Work_name FROM Work_type ORDER BY Work_name ASC");
+
+    if (query.exec()) {
+        while (query.next()) {
+            QString name = query.value(0).toString();
+            ui->type_of_work_comboBox->addItem(name);
+        }
+    } else {
+        qDebug() << "DB error for filling Work Type ComboBox:" << query.lastError().text();
+    }
+}
+
+void Main_Window::on_dismis_worker_pushButton_clicked(){
+
+    int selectedWorkerId = ui->dismiss_worker_combobox->currentData().toInt();
+    QString workerName = ui->dismiss_worker_combobox->currentText();
+
+    if (selectedWorkerId <= 0) {
+        QMessageBox::warning(this, "Error", "Please choose worker to dismis.");
+        return;
+    }
+
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Confirm",
+                                  QString("Are you sure you want to dismis: **%1**?\n\n"
+                                          "**Attention!:** His/her contracts will be saved.").arg(workerName),
+                                  QMessageBox::Yes|QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+
+        if (db.dismiss_worker(selectedWorkerId)) {
+            QMessageBox::information(this, "Succes", QString("Worker '%1' succesfully dismised.").arg(workerName));
+
+            populateDismissWorkerComboBox();
+
+        } else {
+            QMessageBox::critical(this, "DB error",
+                                  "Error deleting worker in the safe way. Check DB logs.");
+        }
+    }
+}
+
+void Main_Window::populateDismissWorkerComboBox(){
+    ui->dismiss_worker_combobox->clear();
+
+    QSqlQuery query;
+
+    query.prepare("SELECT id, Worker_surname, Worker_name FROM Worker ORDER BY id ASC");
+
+    if (query.exec()) {
+        while (query.next()) {
+            int id = query.value("id").toInt();
+            QString surname = query.value("Worker_surname").toString();
+
+            ui->dismiss_worker_combobox->addItem(surname, id);
+        }
+    } else {
+        qDebug() << "DB ERROR filling workers comboBox:" << query.lastError().text();
+    }
+}
+
+void Main_Window::populateDetailChangeWorkerComboBox(){
+    ui->choose_detail_to_change_comboBox->clear();
+
+    QSqlQuery query;
+
+    query.prepare("SELECT Detail_name FROM Detail ORDER BY id ASC");
+
+    if (query.exec()) {
+        while (query.next()) {
+
+            QString detail_name = query.value("Detail_name").toString();
+
+            ui->choose_detail_to_change_comboBox->addItem(detail_name);
+        }
+    } else {
+        qDebug() << "DB ERROR filling detail comboBox:" << query.lastError().text();
+    }
+}
+
+void Main_Window::on_change_detail_value_pushButton_clicked()
+{
+    QString new_detail_name = ui->new_detail_name_lineEdit->text();
+    QString new_detail_cost = ui->new_detail_cost_lineEdit->text();
+    QString new_detail_remaining = ui->new_detail_remaining_lineEdit->text();
+
+    QString detail_to_delete = ui->choose_detail_to_change_comboBox->currentText();
+
+    if(!new_detail_name.isEmpty() && !new_detail_cost.isEmpty() && !new_detail_remaining.isEmpty()){
+        if(db.change_detail_value(detail_to_delete, new_detail_name, new_detail_cost, new_detail_remaining)){
+
+            populateDetailChangeWorkerComboBox();
+            QMessageBox::information(this, "Success", "Detail changed successfully!");
+            populateDetailChangeWorkerComboBox();
+        }else{
+            QMessageBox::warning(this, "Error", "Something went wrong");
+        }
+
+    }else{
+        QMessageBox::warning(this, "Input Error", "Please fill all required fields!");
+    }
+}
+
+void Main_Window::on_create_pdf_pushButton_clicked()
+{
+    QDate startDate = ui->from_report_dateEdit->date();
+    QDate endDate = ui->to_report_dateEdit->date();
+
+    if (startDate > endDate) {
+        QMessageBox::warning(this, "Error", "Date 'from' can`t be earlier than 'to'.");
+        return;
+    }
+
+    QSqlQuery reportQuery = db.getContractReport(startDate, endDate);
+    if (!reportQuery.isActive()) {
+        QMessageBox::critical(this, "DB error", "Query error.");
+        return;
+    }
+
+    if (!reportQuery.next()) {
+        QMessageBox::information(this, "Report", "Report for this period (from " + startDate.toString("dd.MM.yyyy") + " to " + endDate.toString("dd.MM.yyyy") + ") not found any contracts.");
+        return;
+    }
+
+    reportQuery.previous();
+
+    QString defaultFileName = QString("Звіт_Контракти_%1_до_%2.pdf")
+                                  .arg(startDate.toString("yyyyMMdd"), endDate.toString("yyyyMMdd"));
+
+    QString filePath = QFileDialog::getSaveFileName(this, "Зберегти Звіт PDF", defaultFileName, "PDF Files (*.pdf)");
+
+    if (filePath.isEmpty()) return;
+
+    QPrinter printer(QPrinter::PrinterResolution);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName(filePath);
+    printer.setPageSize(QPageSize(QPageSize::A4));
+
+    QPageLayout layout = printer.pageLayout();
+    layout.setOrientation(QPageLayout::Landscape);
+    printer.setPageLayout(layout);
+
+    QPainter painter;
+    if (!painter.begin(&printer)) {
+        QMessageBox::critical(this, "ERROR PDF", "Error with QPainter.");
+        return;
+    }
+
+    int margin = 30;
+    int currentY = margin;
+    int lineHeight = 20;
+    int rowHeight = 15;
+    int pageHeight = printer.pageRect(QPrinter::DevicePixel).height();
+
+    const int colWidths[] = {
+        25, 50, 40, 65, 55, 55, 70, 50, 65, 60, 40, 40, 40
+    };
+    const QString headers[] = {
+        "ID", "Клієнт", "Рік", "№ Авто", "Дата з", "Дата по", "Деталь",
+        "Варт. Дет.", "Робітник", "Позиція", "Робота", "Варт. Роб.", "Заг. Варт."
+    };
+    const int numColumns = sizeof(colWidths) / sizeof(colWidths[0]);
+    int tableWidth = 0;
+    for (int width : colWidths) {
+        tableWidth += width;
+    }
+    int endX = margin + tableWidth;
+
+    auto drawHeaders = [&]() {
+        painter.setFont(QFont("Arial", 7, QFont::Bold));
+        int currentX = margin;
+
+        for (int i = 0; i < numColumns; ++i) {
+            Qt::Alignment alignment = (i == 11 || i == 12) ? Qt::AlignRight : Qt::AlignLeft;
+            painter.drawText(currentX, currentY, colWidths[i], lineHeight, alignment, headers[i]);
+            currentX += colWidths[i];
+        }
+
+        currentY += lineHeight;
+        painter.drawLine(margin, currentY, endX, currentY);
+        currentY += 10;
+    };
+
+    painter.setFont(QFont("Arial", 18, QFont::Bold));
+    painter.drawText(margin, currentY, "Розширений Звіт по Контрактах");
+    currentY += 30;
+    painter.setFont(QFont("Arial", 10));
+    painter.drawText(margin, currentY, QString("Період: %1 — %2")
+                                           .arg(startDate.toString("dd.MM.yyyy"), endDate.toString("dd.MM.yyyy")));
+    currentY += 40;
+    drawHeaders();
+
+    double totalProfit = 0.0;
+    QSet<QString> countedContractIds;
+    QString previousId = "";
+
+
+    while (reportQuery.next()) {
+        if (currentY > pageHeight - margin - rowHeight) {
+            printer.newPage();
+            currentY = margin;
+            drawHeaders();
+        }
+
+        painter.setFont(QFont("Arial", 7));
+        int currentX = margin;
+
+        QString id = reportQuery.value("ID").toString();
+
+        bool isDuplicateRow = (id == previousId);
+
+        QString client = isDuplicateRow ? "" : reportQuery.value("Client").toString();
+        QString carYear = isDuplicateRow ? "" : reportQuery.value("Car year").toString();
+        QString carNumber = isDuplicateRow ? "" : reportQuery.value("Car number").toString();
+        QString dateStart = isDuplicateRow ? "" : reportQuery.value("from").toDate().toString("dd.MM.yyyy");
+        QString dateFinish = isDuplicateRow ? "" : reportQuery.value("to").toDate().toString("dd.MM.yyyy");
+        QString worker = isDuplicateRow ? "" : reportQuery.value("Worker").toString();
+        QString position = isDuplicateRow ? "" : reportQuery.value("Position").toString();
+        QString workName = isDuplicateRow ? "" : reportQuery.value("Work").toString();
+        QString workPrice = isDuplicateRow ? "" : reportQuery.value("Work price").toString();
+        QString totalCostStr = isDuplicateRow ? "" : reportQuery.value("Total Cost").toString();
+
+        QString detailName = reportQuery.value("Detail").toString();
+        QString detailCost = reportQuery.value("Detail cost").toString();
+
+        if (!countedContractIds.contains(id)) {
+            bool ok;
+            double cost = reportQuery.value("Total Cost").toDouble(&ok);
+            if (ok) {
+                totalProfit += cost;
+            }
+            countedContractIds.insert(id);
+        }
+
+        const QString data[] = {
+            isDuplicateRow ? "" : id, client, carYear, carNumber, dateStart, dateFinish,
+            detailName, detailCost, worker, position, workName, workPrice, totalCostStr
+        };
+
+        for (int i = 0; i < numColumns; ++i) {
+            Qt::Alignment alignment = (i == 11 || i == 12) ? Qt::AlignRight : Qt::AlignLeft;
+            int offsetX = (i == 8) ? 5 : 0;
+
+            painter.drawText(currentX + offsetX, currentY, colWidths[i], rowHeight, alignment | Qt::AlignVCenter, data[i]);
+            currentX += colWidths[i];
+        }
+
+        currentY += rowHeight;
+
+        previousId = id;
+
+    }
+
+    currentY += 2 * rowHeight;
+
+    painter.setFont(QFont("Arial", 12, QFont::Bold));
+    painter.drawText(margin, currentY, QString("Загальний дохід за період: %1")
+                                           .arg(QLocale::system().toCurrencyString(totalProfit)));
+
+    painter.end();
+
+    QMessageBox::information(this, "Success", QString("Report saved in file:\n%1").arg(filePath));
+}

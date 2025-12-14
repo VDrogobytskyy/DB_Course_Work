@@ -59,6 +59,24 @@ class Main_Window : public QMainWindow
 
         void on_cancel_pushButton_admin_pg2_clicked();
 
+        void on_create_worker_pushButton_clicked();
+
+        void on_add_detail_pushButton_clicked();
+
+        void populateWorkerDetailComboBox(const QString &workType = QString());
+
+        void populateWorkTypeComboBox();
+
+        void on_dismis_worker_pushButton_clicked();
+
+        void populateDismissWorkerComboBox();
+
+        void populateDetailChangeWorkerComboBox();
+
+        void on_change_detail_value_pushButton_clicked();
+
+        void on_create_pdf_pushButton_clicked();
+
     private:
         Ui::Main_Window *ui;
 

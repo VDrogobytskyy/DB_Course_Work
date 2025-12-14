@@ -11,6 +11,8 @@ public:
 
     bool connect_db();
 
+    bool is_admin(const QString &name, const QString &password);
+
     bool is_user_in_db(const QString &name, const QString &surname, const QString &aftername, const QString &phone);
     bool add_user_in_db(const QString &name, const QString &surname, const QString &aftername, const QString &phone);
 
@@ -30,6 +32,21 @@ public:
     int get_last_car_id(int clientId);
 
     bool insert_full_contract(int clientId, int carId, int workerId, int workTypeId, int detailId, int quantity, const QString &start, const QString &finish, int makeup);
+
+    bool add_detail_in_db(const QString &name, const QString &cost, const QString &remaining);
+    bool add_worker_in_db(const QString &worker_name, const QString &worker_surname, const QString &worker_aftername, const QString &worker_position);
+
+    bool add_work_type_in_db(const QString &work_name, const QString &work_price_str);
+    bool map_worktype_to_position(const QString &work_name, const QString &position);
+    bool map_worktype_to_detail(const QString &work_name, const QString &detail_pattern);
+
+    bool dismiss_worker(int workerId);
+
+    bool change_detail_value(const QString detail_old_name, const QString detail_new_name, const QString detail_new_cost, const QString detail_new_remaining);
+
+    QDate getOldestContractFinishDate();
+
+    QSqlQuery getContractReport(const QDate& startDate, const QDate& endDate);
 };
 
 #endif

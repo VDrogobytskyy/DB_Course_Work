@@ -57,7 +57,17 @@ template <> constexpr inline auto Main_Window::qt_create_metaobjectdata<qt_meta_
         "workName",
         "refreshLoggedUserTable",
         "on_exit_pushButton_admin_pg2_clicked",
-        "on_cancel_pushButton_admin_pg2_clicked"
+        "on_cancel_pushButton_admin_pg2_clicked",
+        "on_create_worker_pushButton_clicked",
+        "on_add_detail_pushButton_clicked",
+        "populateWorkerDetailComboBox",
+        "workType",
+        "populateWorkTypeComboBox",
+        "on_dismis_worker_pushButton_clicked",
+        "populateDismissWorkerComboBox",
+        "populateDetailChangeWorkerComboBox",
+        "on_change_detail_value_pushButton_clicked",
+        "on_create_pdf_pushButton_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -97,6 +107,28 @@ template <> constexpr inline auto Main_Window::qt_create_metaobjectdata<qt_meta_
         QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_cancel_pushButton_admin_pg2_clicked'
         QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_create_worker_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(20, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_add_detail_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(21, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'populateWorkerDetailComboBox'
+        QtMocHelpers::SlotData<void(const QString &)>(22, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 23 },
+        }}),
+        // Slot 'populateWorkerDetailComboBox'
+        QtMocHelpers::SlotData<void()>(22, 2, QMC::AccessPrivate | QMC::MethodCloned, QMetaType::Void),
+        // Slot 'populateWorkTypeComboBox'
+        QtMocHelpers::SlotData<void()>(24, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_dismis_worker_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(25, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'populateDismissWorkerComboBox'
+        QtMocHelpers::SlotData<void()>(26, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'populateDetailChangeWorkerComboBox'
+        QtMocHelpers::SlotData<void()>(27, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_change_detail_value_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(28, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_create_pdf_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -137,6 +169,16 @@ void Main_Window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 14: _t->refreshLoggedUserTable(); break;
         case 15: _t->on_exit_pushButton_admin_pg2_clicked(); break;
         case 16: _t->on_cancel_pushButton_admin_pg2_clicked(); break;
+        case 17: _t->on_create_worker_pushButton_clicked(); break;
+        case 18: _t->on_add_detail_pushButton_clicked(); break;
+        case 19: _t->populateWorkerDetailComboBox((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 20: _t->populateWorkerDetailComboBox(); break;
+        case 21: _t->populateWorkTypeComboBox(); break;
+        case 22: _t->on_dismis_worker_pushButton_clicked(); break;
+        case 23: _t->populateDismissWorkerComboBox(); break;
+        case 24: _t->populateDetailChangeWorkerComboBox(); break;
+        case 25: _t->on_change_detail_value_pushButton_clicked(); break;
+        case 26: _t->on_create_pdf_pushButton_clicked(); break;
         default: ;
         }
     }
@@ -161,14 +203,14 @@ int Main_Window::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 17)
+        if (_id < 27)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 17;
+        _id -= 27;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 17)
+        if (_id < 27)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 17;
+        _id -= 27;
     }
     return _id;
 }
