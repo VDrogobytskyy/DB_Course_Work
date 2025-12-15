@@ -47,6 +47,11 @@ public:
     QDate getOldestContractFinishDate();
 
     QSqlQuery getContractReport(const QDate& startDate, const QDate& endDate);
+
+    QSqlQuery get_all_users();
+    QSqlQuery get_all_cars();
+    QSqlQuery get_all_details();
+    QSqlQuery get_all_workers();
 };
 
 #endif

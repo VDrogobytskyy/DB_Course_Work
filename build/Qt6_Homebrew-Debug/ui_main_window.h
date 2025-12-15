@@ -209,6 +209,34 @@ public:
     QDateEdit *to_report_dateEdit;
     QPushButton *create_pdf_pushButton;
     QLabel *label_33;
+    QPushButton *see_client_list_pushButton;
+    QPushButton *see_car_list_pushbutton;
+    QPushButton *see_detail_list_pushButton;
+    QPushButton *see_workers_list_pushbutton;
+    QWidget *client_list_pg;
+    QPushButton *client_list_cancel_pushButton;
+    QPushButton *client_list_exit_pushbutton;
+    QLabel *Hello_label_up_5;
+    QGroupBox *groupBox_7;
+    QTableWidget *see_client_tableWidget;
+    QWidget *worker_list_pg;
+    QPushButton *cansel_worker_list_pushButton;
+    QPushButton *exit_worker_list_pushButton;
+    QLabel *Hello_label_up_8;
+    QGroupBox *groupBox_10;
+    QTableWidget *see_workers_tableWidget;
+    QWidget *car_list_pg;
+    QPushButton *cansel_car_list_pushButton;
+    QPushButton *exit_car_list_pushButton;
+    QLabel *Hello_label_up_6;
+    QGroupBox *groupBox_8;
+    QTableWidget *see_car_tableWidget;
+    QWidget *detail_list_pg;
+    QPushButton *cansel_detail_list_pushButton;
+    QPushButton *exit_detail_list_pushButton;
+    QLabel *Hello_label_up_7;
+    QGroupBox *groupBox_9;
+    QTableWidget *see_detail_tableWidget;
 
     void setupUi(QMainWindow *Main_Window)
     {
@@ -1033,7 +1061,7 @@ public:
         groupBox_6->setGeometry(QRect(680, 160, 311, 451));
         layoutWidget8 = new QWidget(groupBox_6);
         layoutWidget8->setObjectName("layoutWidget8");
-        layoutWidget8->setGeometry(QRect(10, 36, 291, 191));
+        layoutWidget8->setGeometry(QRect(10, 36, 291, 381));
         verticalLayout_11 = new QVBoxLayout(layoutWidget8);
         verticalLayout_11->setObjectName("verticalLayout_11");
         verticalLayout_11->setContentsMargins(0, 0, 0, 0);
@@ -1056,6 +1084,7 @@ public:
 
         from_report_dateEdit = new QDateEdit(layoutWidget8);
         from_report_dateEdit->setObjectName("from_report_dateEdit");
+        from_report_dateEdit->setCalendarPopup(true);
 
         horizontalLayout_29->addWidget(from_report_dateEdit);
 
@@ -1071,6 +1100,7 @@ public:
 
         to_report_dateEdit = new QDateEdit(layoutWidget8);
         to_report_dateEdit->setObjectName("to_report_dateEdit");
+        to_report_dateEdit->setCalendarPopup(true);
 
         horizontalLayout_30->addWidget(to_report_dateEdit);
 
@@ -1087,7 +1117,103 @@ public:
 
         verticalLayout_11->addWidget(label_33);
 
+        see_client_list_pushButton = new QPushButton(layoutWidget8);
+        see_client_list_pushButton->setObjectName("see_client_list_pushButton");
+
+        verticalLayout_11->addWidget(see_client_list_pushButton);
+
+        see_car_list_pushbutton = new QPushButton(layoutWidget8);
+        see_car_list_pushbutton->setObjectName("see_car_list_pushbutton");
+
+        verticalLayout_11->addWidget(see_car_list_pushbutton);
+
+        see_detail_list_pushButton = new QPushButton(layoutWidget8);
+        see_detail_list_pushButton->setObjectName("see_detail_list_pushButton");
+
+        verticalLayout_11->addWidget(see_detail_list_pushButton);
+
+        see_workers_list_pushbutton = new QPushButton(layoutWidget8);
+        see_workers_list_pushbutton->setObjectName("see_workers_list_pushbutton");
+
+        verticalLayout_11->addWidget(see_workers_list_pushbutton);
+
         stackedWidget->addWidget(admin_page_2);
+        client_list_pg = new QWidget();
+        client_list_pg->setObjectName("client_list_pg");
+        client_list_cancel_pushButton = new QPushButton(client_list_pg);
+        client_list_cancel_pushButton->setObjectName("client_list_cancel_pushButton");
+        client_list_cancel_pushButton->setGeometry(QRect(60, 670, 100, 32));
+        client_list_exit_pushbutton = new QPushButton(client_list_pg);
+        client_list_exit_pushbutton->setObjectName("client_list_exit_pushbutton");
+        client_list_exit_pushbutton->setGeometry(QRect(860, 680, 100, 32));
+        Hello_label_up_5 = new QLabel(client_list_pg);
+        Hello_label_up_5->setObjectName("Hello_label_up_5");
+        Hello_label_up_5->setGeometry(QRect(390, 110, 231, 41));
+        Hello_label_up_5->setFont(font);
+        groupBox_7 = new QGroupBox(client_list_pg);
+        groupBox_7->setObjectName("groupBox_7");
+        groupBox_7->setGeometry(QRect(40, 200, 911, 321));
+        see_client_tableWidget = new QTableWidget(groupBox_7);
+        see_client_tableWidget->setObjectName("see_client_tableWidget");
+        see_client_tableWidget->setGeometry(QRect(0, 20, 911, 301));
+        stackedWidget->addWidget(client_list_pg);
+        worker_list_pg = new QWidget();
+        worker_list_pg->setObjectName("worker_list_pg");
+        cansel_worker_list_pushButton = new QPushButton(worker_list_pg);
+        cansel_worker_list_pushButton->setObjectName("cansel_worker_list_pushButton");
+        cansel_worker_list_pushButton->setGeometry(QRect(40, 680, 100, 32));
+        exit_worker_list_pushButton = new QPushButton(worker_list_pg);
+        exit_worker_list_pushButton->setObjectName("exit_worker_list_pushButton");
+        exit_worker_list_pushButton->setGeometry(QRect(870, 680, 100, 32));
+        Hello_label_up_8 = new QLabel(worker_list_pg);
+        Hello_label_up_8->setObjectName("Hello_label_up_8");
+        Hello_label_up_8->setGeometry(QRect(390, 110, 231, 41));
+        Hello_label_up_8->setFont(font);
+        groupBox_10 = new QGroupBox(worker_list_pg);
+        groupBox_10->setObjectName("groupBox_10");
+        groupBox_10->setGeometry(QRect(40, 200, 911, 321));
+        see_workers_tableWidget = new QTableWidget(groupBox_10);
+        see_workers_tableWidget->setObjectName("see_workers_tableWidget");
+        see_workers_tableWidget->setGeometry(QRect(0, 20, 911, 301));
+        stackedWidget->addWidget(worker_list_pg);
+        car_list_pg = new QWidget();
+        car_list_pg->setObjectName("car_list_pg");
+        cansel_car_list_pushButton = new QPushButton(car_list_pg);
+        cansel_car_list_pushButton->setObjectName("cansel_car_list_pushButton");
+        cansel_car_list_pushButton->setGeometry(QRect(40, 680, 100, 32));
+        exit_car_list_pushButton = new QPushButton(car_list_pg);
+        exit_car_list_pushButton->setObjectName("exit_car_list_pushButton");
+        exit_car_list_pushButton->setGeometry(QRect(860, 680, 100, 32));
+        Hello_label_up_6 = new QLabel(car_list_pg);
+        Hello_label_up_6->setObjectName("Hello_label_up_6");
+        Hello_label_up_6->setGeometry(QRect(390, 110, 231, 41));
+        Hello_label_up_6->setFont(font);
+        groupBox_8 = new QGroupBox(car_list_pg);
+        groupBox_8->setObjectName("groupBox_8");
+        groupBox_8->setGeometry(QRect(40, 200, 911, 321));
+        see_car_tableWidget = new QTableWidget(groupBox_8);
+        see_car_tableWidget->setObjectName("see_car_tableWidget");
+        see_car_tableWidget->setGeometry(QRect(0, 20, 911, 301));
+        stackedWidget->addWidget(car_list_pg);
+        detail_list_pg = new QWidget();
+        detail_list_pg->setObjectName("detail_list_pg");
+        cansel_detail_list_pushButton = new QPushButton(detail_list_pg);
+        cansel_detail_list_pushButton->setObjectName("cansel_detail_list_pushButton");
+        cansel_detail_list_pushButton->setGeometry(QRect(40, 690, 100, 32));
+        exit_detail_list_pushButton = new QPushButton(detail_list_pg);
+        exit_detail_list_pushButton->setObjectName("exit_detail_list_pushButton");
+        exit_detail_list_pushButton->setGeometry(QRect(870, 680, 100, 32));
+        Hello_label_up_7 = new QLabel(detail_list_pg);
+        Hello_label_up_7->setObjectName("Hello_label_up_7");
+        Hello_label_up_7->setGeometry(QRect(390, 110, 231, 41));
+        Hello_label_up_7->setFont(font);
+        groupBox_9 = new QGroupBox(detail_list_pg);
+        groupBox_9->setObjectName("groupBox_9");
+        groupBox_9->setGeometry(QRect(40, 200, 911, 321));
+        see_detail_tableWidget = new QTableWidget(groupBox_9);
+        see_detail_tableWidget->setObjectName("see_detail_tableWidget");
+        see_detail_tableWidget->setGeometry(QRect(0, 20, 911, 301));
+        stackedWidget->addWidget(detail_list_pg);
         Main_Window->setCentralWidget(centralwidget);
 
         retranslateUi(Main_Window);
@@ -1230,7 +1356,27 @@ public:
         label_32->setText(QCoreApplication::translate("Main_Window", "to", nullptr));
         to_report_dateEdit->setDisplayFormat(QCoreApplication::translate("Main_Window", "yyyy.MM.dd", nullptr));
         create_pdf_pushButton->setText(QCoreApplication::translate("Main_Window", "Create PDF", nullptr));
-        label_33->setText(QCoreApplication::translate("Main_Window", "Have a nice day :)", nullptr));
+        label_33->setText(QCoreApplication::translate("Main_Window", "Also you can check:", nullptr));
+        see_client_list_pushButton->setText(QCoreApplication::translate("Main_Window", "See client list", nullptr));
+        see_car_list_pushbutton->setText(QCoreApplication::translate("Main_Window", "See car list", nullptr));
+        see_detail_list_pushButton->setText(QCoreApplication::translate("Main_Window", "See detail list", nullptr));
+        see_workers_list_pushbutton->setText(QCoreApplication::translate("Main_Window", "See workers list", nullptr));
+        client_list_cancel_pushButton->setText(QCoreApplication::translate("Main_Window", "Cancel", nullptr));
+        client_list_exit_pushbutton->setText(QCoreApplication::translate("Main_Window", "Exit", nullptr));
+        Hello_label_up_5->setText(QCoreApplication::translate("Main_Window", "PrimeMotors Service", nullptr));
+        groupBox_7->setTitle(QCoreApplication::translate("Main_Window", "Client list", nullptr));
+        cansel_worker_list_pushButton->setText(QCoreApplication::translate("Main_Window", "Cancel", nullptr));
+        exit_worker_list_pushButton->setText(QCoreApplication::translate("Main_Window", "Exit", nullptr));
+        Hello_label_up_8->setText(QCoreApplication::translate("Main_Window", "PrimeMotors Service", nullptr));
+        groupBox_10->setTitle(QCoreApplication::translate("Main_Window", "Worker list", nullptr));
+        cansel_car_list_pushButton->setText(QCoreApplication::translate("Main_Window", "Cancel", nullptr));
+        exit_car_list_pushButton->setText(QCoreApplication::translate("Main_Window", "Exit", nullptr));
+        Hello_label_up_6->setText(QCoreApplication::translate("Main_Window", "PrimeMotors Service", nullptr));
+        groupBox_8->setTitle(QCoreApplication::translate("Main_Window", "Car list", nullptr));
+        cansel_detail_list_pushButton->setText(QCoreApplication::translate("Main_Window", "Cancel", nullptr));
+        exit_detail_list_pushButton->setText(QCoreApplication::translate("Main_Window", "Exit", nullptr));
+        Hello_label_up_7->setText(QCoreApplication::translate("Main_Window", "PrimeMotors Service", nullptr));
+        groupBox_9->setTitle(QCoreApplication::translate("Main_Window", "Detail list", nullptr));
     } // retranslateUi
 
 };

@@ -15,9 +15,18 @@ CONFIG += sdk_no_version_check
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    buttons.cpp \
     database_logic.cpp \
+    db_add.cpp \
+    db_get.cpp \
+    db_get_all.cpp \
+    db_mapping.cpp \
     main.cpp \
-    main_window.cpp
+    main_pushbuttons.cpp \
+    main_window.cpp \
+    pdf_creator.cpp \
+    populates.cpp \
+    refresh_tables.cpp
 
 HEADERS += \
     database_logic.h \

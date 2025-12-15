@@ -52,15 +52,33 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../database_logic.cpp \
+SOURCES       = ../../buttons.cpp \
+		../../database_logic.cpp \
+		../../db_add.cpp \
+		../../db_get.cpp \
+		../../db_get_all.cpp \
+		../../db_mapping.cpp \
 		../../main.cpp \
-		../../main_window.cpp qrc_bg_images.cpp \
+		../../main_pushbuttons.cpp \
+		../../main_window.cpp \
+		../../pdf_creator.cpp \
+		../../populates.cpp \
+		../../refresh_tables.cpp qrc_bg_images.cpp \
 		qrc_db_conf.cpp \
 		qrc_page1_bg.cpp \
 		moc_main_window.cpp
-OBJECTS       = database_logic.o \
+OBJECTS       = buttons.o \
+		database_logic.o \
+		db_add.o \
+		db_get.o \
+		db_get_all.o \
+		db_mapping.o \
 		main.o \
+		main_pushbuttons.o \
 		main_window.o \
+		pdf_creator.o \
+		populates.o \
+		refresh_tables.o \
 		qrc_bg_images.o \
 		qrc_db_conf.o \
 		qrc_page1_bg.o \
@@ -438,9 +456,18 @@ DIST          = ../../.gitignore \
 		/opt/homebrew/share/qt/mkspecs/features/yacc.prf \
 		/opt/homebrew/share/qt/mkspecs/features/lex.prf \
 		../../../../CW.pro ../../database_logic.h \
-		../../main_window.h ../../database_logic.cpp \
+		../../main_window.h ../../buttons.cpp \
+		../../database_logic.cpp \
+		../../db_add.cpp \
+		../../db_get.cpp \
+		../../db_get_all.cpp \
+		../../db_mapping.cpp \
 		../../main.cpp \
-		../../main_window.cpp
+		../../main_pushbuttons.cpp \
+		../../main_window.cpp \
+		../../pdf_creator.cpp \
+		../../populates.cpp \
+		../../refresh_tables.cpp
 QMAKE_TARGET  = CW
 DESTDIR       = 
 TARGET        = CW.app/Contents/MacOS/CW
@@ -1253,7 +1280,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../../bg_images.qrc ../../db_conf.qrc ../../page1_bg.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/homebrew/share/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../database_logic.h ../../main_window.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../database_logic.cpp ../../main.cpp ../../main_window.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../buttons.cpp ../../database_logic.cpp ../../db_add.cpp ../../db_get.cpp ../../db_get_all.cpp ../../db_mapping.cpp ../../main.cpp ../../main_pushbuttons.cpp ../../main_window.cpp ../../pdf_creator.cpp ../../populates.cpp ../../refresh_tables.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../main_window.ui $(DISTDIR)/
 
 
@@ -1345,6 +1372,19 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
+buttons.o: ../../buttons.cpp ../../main_window.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		ui_main_window.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buttons.o ../../buttons.cpp
+
 database_logic.o: ../../database_logic.cpp ../../database_logic.h \
 		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
 		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
@@ -1364,6 +1404,60 @@ database_logic.o: ../../database_logic.cpp ../../database_logic.h \
 		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o database_logic.o ../../database_logic.cpp
 
+db_add.o: ../../db_add.cpp ../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdebug.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o db_add.o ../../db_add.cpp
+
+db_get.o: ../../db_get.cpp ../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdebug.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDate \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdatetime.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o db_get.o ../../db_get.cpp
+
+db_get_all.o: ../../db_get_all.cpp ../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdebug.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o db_get_all.o ../../db_get_all.cpp
+
+db_mapping.o: ../../db_mapping.cpp ../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdebug.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o db_mapping.o ../../db_mapping.cpp
+
 main.o: ../../main.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -1377,6 +1471,29 @@ main.o: ../../main.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../main.cpp
+
+main_pushbuttons.o: ../../main_pushbuttons.cpp ../../main_window.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		ui_main_window.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlRecord \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlrecord.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDate \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdatetime.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QTimer \
+		/opt/homebrew/lib/QtCore.framework/Headers/qtimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_pushbuttons.o ../../main_pushbuttons.cpp
 
 main_window.o: ../../main_window.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
@@ -1404,8 +1521,87 @@ main_window.o: ../../main_window.cpp ../../main_window.h \
 		/opt/homebrew/lib/QtGui.framework/Headers/QPainter \
 		/opt/homebrew/lib/QtGui.framework/Headers/qpainter.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QFileDialog \
-		/opt/homebrew/lib/QtWidgets.framework/Headers/qfiledialog.h
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QSet \
+		/opt/homebrew/lib/QtCore.framework/Headers/qset.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main_window.o ../../main_window.cpp
+
+pdf_creator.o: ../../pdf_creator.cpp ../../main_window.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		ui_main_window.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlRecord \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlrecord.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDate \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdatetime.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QTimer \
+		/opt/homebrew/lib/QtCore.framework/Headers/qtimer.h \
+		/opt/homebrew/lib/QtPrintSupport.framework/Headers/QPrinter \
+		/opt/homebrew/lib/QtPrintSupport.framework/Headers/qprinter.h \
+		/opt/homebrew/lib/QtGui.framework/Headers/QPainter \
+		/opt/homebrew/lib/QtGui.framework/Headers/qpainter.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QFileDialog \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QSet \
+		/opt/homebrew/lib/QtCore.framework/Headers/qset.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pdf_creator.o ../../pdf_creator.cpp
+
+populates.o: ../../populates.cpp ../../main_window.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		ui_main_window.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlRecord \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlrecord.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDate \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdatetime.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QTimer \
+		/opt/homebrew/lib/QtCore.framework/Headers/qtimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o populates.o ../../populates.cpp
+
+refresh_tables.o: ../../refresh_tables.cpp ../../main_window.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMainWindow \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../database_logic.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlDatabase \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqldatabase.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QString \
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		ui_main_window.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlQuery \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlquery.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlError \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlerror.h \
+		/opt/homebrew/lib/QtSql.framework/Headers/QSqlRecord \
+		/opt/homebrew/lib/QtSql.framework/Headers/qsqlrecord.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDate \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdatetime.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QTimer \
+		/opt/homebrew/lib/QtCore.framework/Headers/qtimer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o refresh_tables.o ../../refresh_tables.cpp
 
 qrc_bg_images.o: qrc_bg_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_bg_images.o qrc_bg_images.cpp

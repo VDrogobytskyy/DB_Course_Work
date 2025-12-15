@@ -77,6 +77,38 @@ class Main_Window : public QMainWindow
 
         void on_create_pdf_pushButton_clicked();
 
+        void on_client_list_exit_pushbutton_clicked();
+
+        void on_client_list_cancel_pushButton_clicked();
+
+        void on_see_client_list_pushButton_clicked();
+
+        void refreshClientListTable();
+
+        void on_exit_car_list_pushButton_clicked();
+
+        void on_cansel_car_list_pushButton_clicked();
+
+        void refreshCarListTable();
+
+        void on_see_car_list_pushbutton_clicked();
+
+        void on_exit_detail_list_pushButton_clicked();
+
+        void on_cansel_detail_list_pushButton_clicked();
+
+        void on_see_detail_list_pushButton_clicked();
+
+        void refreshDetailListTable();
+
+        void on_exit_worker_list_pushButton_clicked();
+
+        void on_cansel_worker_list_pushButton_clicked();
+
+        void on_see_workers_list_pushbutton_clicked();
+
+        void refreshWorkersListTable();
+
     private:
         Ui::Main_Window *ui;
 

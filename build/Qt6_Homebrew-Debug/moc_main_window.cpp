@@ -67,7 +67,23 @@ template <> constexpr inline auto Main_Window::qt_create_metaobjectdata<qt_meta_
         "populateDismissWorkerComboBox",
         "populateDetailChangeWorkerComboBox",
         "on_change_detail_value_pushButton_clicked",
-        "on_create_pdf_pushButton_clicked"
+        "on_create_pdf_pushButton_clicked",
+        "on_client_list_exit_pushbutton_clicked",
+        "on_client_list_cancel_pushButton_clicked",
+        "on_see_client_list_pushButton_clicked",
+        "refreshClientListTable",
+        "on_exit_car_list_pushButton_clicked",
+        "on_cansel_car_list_pushButton_clicked",
+        "refreshCarListTable",
+        "on_see_car_list_pushbutton_clicked",
+        "on_exit_detail_list_pushButton_clicked",
+        "on_cansel_detail_list_pushButton_clicked",
+        "on_see_detail_list_pushButton_clicked",
+        "refreshDetailListTable",
+        "on_exit_worker_list_pushButton_clicked",
+        "on_cansel_worker_list_pushButton_clicked",
+        "on_see_workers_list_pushbutton_clicked",
+        "refreshWorkersListTable"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -129,6 +145,38 @@ template <> constexpr inline auto Main_Window::qt_create_metaobjectdata<qt_meta_
         QtMocHelpers::SlotData<void()>(28, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_create_pdf_pushButton_clicked'
         QtMocHelpers::SlotData<void()>(29, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_client_list_exit_pushbutton_clicked'
+        QtMocHelpers::SlotData<void()>(30, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_client_list_cancel_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(31, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_see_client_list_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(32, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'refreshClientListTable'
+        QtMocHelpers::SlotData<void()>(33, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exit_car_list_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(34, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_cansel_car_list_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(35, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'refreshCarListTable'
+        QtMocHelpers::SlotData<void()>(36, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_see_car_list_pushbutton_clicked'
+        QtMocHelpers::SlotData<void()>(37, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exit_detail_list_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(38, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_cansel_detail_list_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(39, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_see_detail_list_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(40, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'refreshDetailListTable'
+        QtMocHelpers::SlotData<void()>(41, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_exit_worker_list_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(42, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_cansel_worker_list_pushButton_clicked'
+        QtMocHelpers::SlotData<void()>(43, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_see_workers_list_pushbutton_clicked'
+        QtMocHelpers::SlotData<void()>(44, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'refreshWorkersListTable'
+        QtMocHelpers::SlotData<void()>(45, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -179,6 +227,22 @@ void Main_Window::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 24: _t->populateDetailChangeWorkerComboBox(); break;
         case 25: _t->on_change_detail_value_pushButton_clicked(); break;
         case 26: _t->on_create_pdf_pushButton_clicked(); break;
+        case 27: _t->on_client_list_exit_pushbutton_clicked(); break;
+        case 28: _t->on_client_list_cancel_pushButton_clicked(); break;
+        case 29: _t->on_see_client_list_pushButton_clicked(); break;
+        case 30: _t->refreshClientListTable(); break;
+        case 31: _t->on_exit_car_list_pushButton_clicked(); break;
+        case 32: _t->on_cansel_car_list_pushButton_clicked(); break;
+        case 33: _t->refreshCarListTable(); break;
+        case 34: _t->on_see_car_list_pushbutton_clicked(); break;
+        case 35: _t->on_exit_detail_list_pushButton_clicked(); break;
+        case 36: _t->on_cansel_detail_list_pushButton_clicked(); break;
+        case 37: _t->on_see_detail_list_pushButton_clicked(); break;
+        case 38: _t->refreshDetailListTable(); break;
+        case 39: _t->on_exit_worker_list_pushButton_clicked(); break;
+        case 40: _t->on_cansel_worker_list_pushButton_clicked(); break;
+        case 41: _t->on_see_workers_list_pushbutton_clicked(); break;
+        case 42: _t->refreshWorkersListTable(); break;
         default: ;
         }
     }
@@ -203,14 +267,14 @@ int Main_Window::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 27)
+        if (_id < 43)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 27;
+        _id -= 43;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 27)
+        if (_id < 43)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 27;
+        _id -= 43;
     }
     return _id;
 }

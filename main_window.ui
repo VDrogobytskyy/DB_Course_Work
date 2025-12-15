@@ -1384,7 +1384,7 @@
          <x>10</x>
          <y>36</y>
          <width>291</width>
-         <height>191</height>
+         <height>381</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -1416,6 +1416,9 @@
             <property name="displayFormat">
              <string>yyyy.MM.dd</string>
             </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>
@@ -1434,6 +1437,9 @@
             <property name="displayFormat">
              <string>yyyy.MM.dd</string>
             </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
          </layout>
@@ -1448,11 +1454,315 @@
         <item>
          <widget class="QLabel" name="label_33">
           <property name="text">
-           <string>Have a nice day :)</string>
+           <string>Also you can check:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="see_client_list_pushButton">
+          <property name="text">
+           <string>See client list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="see_car_list_pushbutton">
+          <property name="text">
+           <string>See car list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="see_detail_list_pushButton">
+          <property name="text">
+           <string>See detail list</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="see_workers_list_pushbutton">
+          <property name="text">
+           <string>See workers list</string>
           </property>
          </widget>
         </item>
        </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="client_list_pg">
+     <widget class="QPushButton" name="client_list_cancel_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>670</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="client_list_exit_pushbutton">
+      <property name="geometry">
+       <rect>
+        <x>860</x>
+        <y>680</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Exit</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Hello_label_up_5">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>110</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>25</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>PrimeMotors Service</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_7">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>200</y>
+        <width>911</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Client list</string>
+      </property>
+      <widget class="QTableWidget" name="see_client_tableWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>911</width>
+         <height>301</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="worker_list_pg">
+     <widget class="QPushButton" name="cansel_worker_list_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>680</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="exit_worker_list_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>870</x>
+        <y>680</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Exit</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Hello_label_up_8">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>110</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>25</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>PrimeMotors Service</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_10">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>200</y>
+        <width>911</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Worker list</string>
+      </property>
+      <widget class="QTableWidget" name="see_workers_tableWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>911</width>
+         <height>301</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="car_list_pg">
+     <widget class="QPushButton" name="cansel_car_list_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>680</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="exit_car_list_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>860</x>
+        <y>680</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Exit</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Hello_label_up_6">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>110</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>25</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>PrimeMotors Service</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_8">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>200</y>
+        <width>911</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Car list</string>
+      </property>
+      <widget class="QTableWidget" name="see_car_tableWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>911</width>
+         <height>301</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="detail_list_pg">
+     <widget class="QPushButton" name="cansel_detail_list_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>690</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="exit_detail_list_pushButton">
+      <property name="geometry">
+       <rect>
+        <x>870</x>
+        <y>680</y>
+        <width>100</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Exit</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Hello_label_up_7">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>110</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>25</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>PrimeMotors Service</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_9">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>200</y>
+        <width>911</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Detail list</string>
+      </property>
+      <widget class="QTableWidget" name="see_detail_tableWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>911</width>
+         <height>301</height>
+        </rect>
+       </property>
       </widget>
      </widget>
     </widget>
